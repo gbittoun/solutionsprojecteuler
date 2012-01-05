@@ -33,7 +33,28 @@
 using namespace std;
 using namespace Computing;
 
+long long power(long long x, long long p)
+{
+    long long result = 1;
+
+    while(p)
+    {
+        result *= x;
+        --p;
+    }
+
+    return result;
+}
+
+long long makePalindrome(long long n, int digits)
+{
+}
+
 int main()
 {
-    return problem_35();
+    for (long long idx = 0 ; idx < 1000 ; ++idx)
+    {
+    }
+
+    return 0;
 }
