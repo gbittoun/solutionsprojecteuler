@@ -1,2 +1,2 @@
-int is_palindrome(int x);
+int is_palindrome(long long x, int base);
 int problem_4();

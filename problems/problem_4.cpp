@@ -4,22 +4,22 @@
 
 using namespace std;
 
-int is_palindrome(int x)
+int is_palindrome(long long x, int base)
 {
-    int num[16];
+    int num[128];
     int size = 0;
     int div = 1;
 
     while(x / div)
     {
-        div *= 10;
+        div *= base;
         ++size;
     }
 
     for(int idx = 0 ; idx < size ; ++idx)
     {
-        num[idx] = (x % div) / (div / 10);
-        div /= 10;
+        num[idx] = (x % div) / (div / base);
+        div /= base;
     }
 
     for(int idx = 0 ; idx < size / 2; ++idx)
@@ -37,8 +37,8 @@ int problem_4()
 
     for(int a = 999, b = 999 ; (a > 100) || ( (a = 999) && (--b > 100) ) ; --a )
     {
-        int result = a * b;
-        if(is_palindrome(result) && (highest_palindrome < (result)))
+        long long result = a * b;
+        if(is_palindrome(result, 10) && (highest_palindrome < (result)))
         {
             res_a = a;
             res_b = b;
