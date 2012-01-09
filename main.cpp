@@ -35,7 +35,36 @@
 using namespace std;
 using namespace Computing;
 
+#include <sstream>
+
 int main()
 {
-    return problem_37();
+    for (long long idx = 1 ; idx < 1000000 ; ++idx)
+    {
+        ostringstream stream;
+        long long factor = 1;
+        set<int> digits;
+
+        while(true)
+        {
+            stream << idx * factor;
+
+            for(size_t s = 0 ; s < stream.str().size() ; ++s)
+            {
+                digits.insert(stream.str().c_str()[s]);
+            }
+
+            if(stream.str().size() != digits.size())
+                break;
+            else if( (stream.str().size() == digits.size()) && (digits.size() == 9) )
+            {
+                cout << idx << " " << stream.str() << endl;
+                break;
+            }
+
+            ++factor;
+        }
+    }
+
+    return 0;
 }
