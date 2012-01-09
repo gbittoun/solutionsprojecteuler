@@ -39,7 +39,7 @@ using namespace Computing;
 
 int main()
 {
-    for (long long idx = 1 ; idx < 1000000 ; ++idx)
+    for (long long idx = 1 ; idx < 10000 ; ++idx)
     {
         ostringstream stream;
         long long factor = 1;
@@ -56,7 +56,7 @@ int main()
 
             if(stream.str().size() != digits.size())
                 break;
-            else if( (stream.str().size() == digits.size()) && (digits.size() == 9) )
+            else if( (digits.find('0') == digits.end()) && (stream.str().size() == digits.size()) && (digits.size() == 9) )
             {
                 cout << idx << " " << stream.str() << endl;
                 break;
