@@ -33,48 +33,12 @@
 #include "problems/problem_37.hpp"
 #include "problems/problem_38.hpp"
 #include "problems/problem_40.hpp"
+#include "problems/problem_41.hpp"
 
 using namespace std;
 using namespace Computing;
 
-#include <sstream>
-
 int main()
 {
-    set<long long> primes;
-    FillPrimes(primes, 10000000);
-
-    set<long long>::iterator it = primes.begin();
-
-    while(it != primes.end())
-    {
-        ostringstream stream;
-        stream << *it;
-        set<int> digits;
-
-        bool useless = false;
-
-        for(size_t idx = 0 ; idx < stream.str().size() ; ++idx)
-        {
-            if(digits.find(stream.str().c_str()[idx]) != digits.end())
-            {
-                useless = true;
-                break;
-            }
-            digits.insert(stream.str().c_str()[idx]);
-        }
-
-        if(useless)
-        {
-            ++it;
-            continue;
-        }
-
-        if(*digits.begin() == '1' && digits.size() == (*digits.rbegin() - *digits.begin() + 1) )
-            cout << *it << endl;
-
-        ++it;
-    }
-
-    return 0;
+    return problem_41();
 }
