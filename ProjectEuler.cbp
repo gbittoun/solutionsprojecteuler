@@ -109,6 +109,8 @@
 		<Unit filename="problems/problem_44.hpp" />
 		<Unit filename="problems/problem_45.cpp" />
 		<Unit filename="problems/problem_45.hpp" />
+		<Unit filename="problems/problem_46.cpp" />
+		<Unit filename="problems/problem_46.hpp" />
 		<Unit filename="problems/problem_7.cpp" />
 		<Unit filename="problems/problem_7.hpp" />
 		<Unit filename="problems/problem_8.cpp" />
