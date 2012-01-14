@@ -44,9 +44,6 @@
 using namespace std;
 using namespace Computing;
 
-#include <map>
-#include <math.h>
-
 int main()
 {
     return problem_47();
