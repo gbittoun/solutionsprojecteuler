@@ -39,11 +39,15 @@
 #include "problems/problem_44.hpp"
 #include "problems/problem_45.hpp"
 #include "problems/problem_46.hpp"
+#include "problems/problem_47.hpp"
 
 using namespace std;
 using namespace Computing;
 
+#include <map>
+#include <math.h>
+
 int main()
 {
-    return problem_46();
+    return problem_47();
 }
