@@ -50,5 +50,20 @@ using namespace Computing;
 
 int main()
 {
-    return problem_52();
+    set<long long> primes;
+    FillPrimes(primes, 1000000LL);
+
+    for(set<long long>::iterator p0 = primes.lower_bound(10000) ; *p0 <= 100000 ; ++p0)
+    {
+        set<long long>::iterator p1 = p0;
+        for(++p1 ; *p1 <= 100000 ; ++p1)
+        {
+            map<char, int> digits;
+            DigitsDecompose<5, 10>(*p1 - *p0, digits);
+            if(digits.size() == 2)
+                cout << *p0 << "," << *p1 << " : " << *p1 - *p0 << endl;
+        }
+    }
+
+    return 0;
 }
