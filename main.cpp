@@ -48,6 +48,16 @@
 using namespace std;
 using namespace Computing;
 
+template<int DIGITS, int BASE>
+void ComputeDigitsPattern(long long n, map<int, int> & pattern)
+{
+    for(int idx = 0 ; idx < DIGITS ; ++idx)
+    {
+        pattern[idx] = n % BASE;
+        n /= BASE;
+    }
+}
+
 int main()
 {
     set<long long> primes;
@@ -60,8 +70,15 @@ int main()
         {
             map<char, int> digits;
             DigitsDecompose<5, 10>(*p1 - *p0, digits);
-            if(digits.size() == 2)
+            if(digits.size() == 2 && digits.find(0) != digits.end())
+            {
+                map<int, int> pattern0, pattern1, pattern2;
+                ComputeDigitsPattern<5, 10>(*p0, pattern0);
+                ComputeDigitsPattern<5, 10>(*p1, pattern1);
+                ComputeDigitsPattern<5, 10>(*p1 - *p0, pattern2);
+
                 cout << *p0 << "," << *p1 << " : " << *p1 - *p0 << endl;
+            }
         }
     }
 
