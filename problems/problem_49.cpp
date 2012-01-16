@@ -6,19 +6,6 @@ using namespace std;
 #include "problem_37.hpp"
 #include "problem_49.hpp"
 
-namespace Computing
-{
-    template<int DIGITS, int BASE>
-    void DigitsDecompose(long long n, map<char, int> & digits)
-    {
-        for(int idx = 0 ; idx < DIGITS ; ++idx)
-        {
-            ++digits[n % BASE];
-            n /= BASE;
-        }
-    }
-}
-
 #include <vector>
 
 using namespace Computing;

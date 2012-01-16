@@ -5,7 +5,14 @@ namespace Computing
     using namespace std;
 
     template<int DIGITS, int BASE>
-    void DigitsDecompose(long long n, map<char, int> & digits);
+    void DigitsDecompose(long long n, map<char, int> & digits)
+    {
+        for(int idx = 0 ; idx < DIGITS ; ++idx)
+        {
+            ++digits[n % BASE];
+            n /= BASE;
+        }
+    }
 
     struct DigitsComparer
     {
