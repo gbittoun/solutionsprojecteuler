@@ -43,44 +43,13 @@
 #include "problems/problem_48.hpp"
 #include "problems/problem_49.hpp"
 #include "problems/problem_50.hpp"
+#include "problems/problem_51.hpp"
 #include "problems/problem_52.hpp"
 
 using namespace std;
 using namespace Computing;
 
-template<int DIGITS, int BASE>
-void ComputeDigitsPattern(long long n, map<int, int> & pattern)
-{
-    for(int idx = 0 ; idx < DIGITS ; ++idx)
-    {
-        pattern[idx] = n % BASE;
-        n /= BASE;
-    }
-}
-
 int main()
 {
-    set<long long> primes;
-    FillPrimes(primes, 1000000LL);
-
-    for(set<long long>::iterator p0 = primes.lower_bound(10000) ; *p0 <= 100000 ; ++p0)
-    {
-        set<long long>::iterator p1 = p0;
-        for(++p1 ; *p1 <= 100000 ; ++p1)
-        {
-            map<char, int> digits;
-            DigitsDecompose<5, 10>(*p1 - *p0, digits);
-            if(digits.size() == 2 && digits.find(0) != digits.end())
-            {
-                map<int, int> pattern0, pattern1, pattern2;
-                ComputeDigitsPattern<5, 10>(*p0, pattern0);
-                ComputeDigitsPattern<5, 10>(*p1, pattern1);
-                ComputeDigitsPattern<5, 10>(*p1 - *p0, pattern2);
-
-                cout << *p0 << "," << *p1 << " : " << *p1 - *p0 << endl;
-            }
-        }
-    }
-
-    return 0;
+    return problem_51();
 }
