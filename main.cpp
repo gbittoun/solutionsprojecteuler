@@ -58,6 +58,43 @@ void ComputeDigitsPattern(long long n, map<char, int> & pattern)
     }
 }
 
+template<int DIGITS, int BASE>
+void ComputeDigitsPattern(long long n, map<char, bool> & pattern)
+{
+    for(int idx = 0 ; idx < DIGITS ; ++idx)
+    {
+        pattern[idx] = (n % BASE) != 0;
+        n /= BASE;
+    }
+}
+
+struct DigitsPatternComparerFromBool
+{
+    bool operator()(const map<char, bool> & x, const map<char, bool> & y)
+    {
+        if(x.size() < y.size())
+            return true;
+        else if(x.size() > y.size())
+            return false;
+
+        map<char, bool>::const_iterator it_x = x.begin();
+        map<char, bool>::const_iterator it_y = y.begin();
+
+        while(true)
+        {
+            if(!it_x->second && it_y->second)
+                return true;
+            else if(it_x->second && !it_y->second)
+                return false;
+
+            ++it_x;
+            ++it_y;
+        }
+
+        return false;
+    }
+};
+
 int DigitsDiff(const map<char, int> & p0, const map<char, int> & p1)
 {
     if(p0.size() >= p1.size())
@@ -87,6 +124,7 @@ int DigitsDiff(const map<char, int> & p0, const map<char, int> & p1)
 
 int main()
 {
+#if 0
     set<long long> primes;
     FillPrimes(primes, 1000000LL);
 
@@ -105,10 +143,14 @@ int main()
                 DigitsDecompose<5, 10>(*p1 - *p0, pattern2);
 
                 if(pattern0.size() == pattern1.size() && DigitsDiff(pattern0, pattern1) == 1)
-                    cout << *p0 << "," << *p1 << " : " << *p1 - *p0 << endl;
+                {
+                    cout << *p0 << "," << *p1 << endl;
+                }
             }
         }
     }
 
+Finish:
+#endif
     return 0;
 }
