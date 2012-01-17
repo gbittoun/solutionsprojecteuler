@@ -49,13 +49,40 @@ using namespace std;
 using namespace Computing;
 
 template<int DIGITS, int BASE>
-void ComputeDigitsPattern(long long n, map<int, int> & pattern)
+void ComputeDigitsPattern(long long n, map<char, int> & pattern)
 {
     for(int idx = 0 ; idx < DIGITS ; ++idx)
     {
         pattern[idx] = n % BASE;
         n /= BASE;
     }
+}
+
+int DigitsDiff(const map<char, int> & p0, const map<char, int> & p1)
+{
+    if(p0.size() >= p1.size())
+    {
+        int diff = p0.size();
+        for(map<char, int>::const_iterator it = p0.begin() ; it != p0.end() ; ++it)
+        {
+            if(p1.find(it->first) != p1.end())
+                --diff;
+        }
+
+        return diff;
+    }
+    else
+    {
+        int diff = p0.size();
+        for(map<char, int>::const_iterator it = p1.begin() ; it != p1.end() ; ++it)
+        {
+            if(p0.find(it->first) != p0.end())
+                --diff;
+        }
+
+        return diff;
+    }
+
 }
 
 int main()
@@ -72,12 +99,13 @@ int main()
             DigitsDecompose<5, 10>(*p1 - *p0, digits);
             if(digits.size() == 2 && digits.find(0) != digits.end())
             {
-                map<int, int> pattern0, pattern1, pattern2;
-                ComputeDigitsPattern<5, 10>(*p0, pattern0);
-                ComputeDigitsPattern<5, 10>(*p1, pattern1);
-                ComputeDigitsPattern<5, 10>(*p1 - *p0, pattern2);
+                map<char, int> pattern0, pattern1, pattern2;
+                DigitsDecompose<5, 10>(*p0, pattern0);
+                DigitsDecompose<5, 10>(*p1, pattern1);
+                DigitsDecompose<5, 10>(*p1 - *p0, pattern2);
 
-                cout << *p0 << "," << *p1 << " : " << *p1 - *p0 << endl;
+                if(pattern0.size() == pattern1.size() && DigitsDiff(pattern0, pattern1) == 1)
+                    cout << *p0 << "," << *p1 << " : " << *p1 - *p0 << endl;
             }
         }
     }
