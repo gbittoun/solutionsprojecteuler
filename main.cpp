@@ -104,8 +104,8 @@ class Hand
 {
     set<Card, CardComparer> cards;
 
-    map<Card::Suit, vector<Card::Value> > cardsBySuit;
-    map<Card::Value, vector<Card::Suit> > cardsByValue;
+    map<Card::Suit, set<Card::Value> > cardsBySuit;
+    map<Card::Value, set<Card::Suit> > cardsByValue;
 
     public:
 
@@ -114,15 +114,54 @@ class Hand
     void PushCard(Card c)
     {
         cards.insert(c);
-        cardsBySuit[c.GetSuit()].push_back(c.GetValue());
-        cardsByValue[c.GetValue()].push_back(c.GetSuit());
+        cardsBySuit[c.GetSuit()].insert(c.GetValue());
+        cardsByValue[c.GetValue()].insert(c.GetSuit());
     }
 
     Figure GetFigure()
     {
-        for(map<Card::Value, vector<Card::Suit> >::iterator it = cardsByValue.begin() ; it != cardsByValue.end() ; ++it)
+        int pairs = 0;
+        set<Card::Value> pairValues;
+
+        bool isThreeOfAKind = false;
+        Card::Value threeValue;
+
+        bool isFourOfAKind = false;
+        Card::Value fourValue;
+
+        for(map<Card::Value, set<Card::Suit> >::iterator it = cardsByValue.begin() ; it != cardsByValue.end() ; ++it)
         {
+            if(it->second.size() == 2)
+            {
+                ++pairs;
+                pairValues.insert(it->first);
+            }
+            else if(it->second.size() == 3)
+            {
+                isThreeOfAKind = true;
+                threeValue = it->first;
+            }
+            else if(it->second.size() == 4)
+            {
+                isFourOfAKind = true;
+                fourValue = it->first;
+            }
         }
+
+        bool isFlush = false;
+        isFlush = (cardsBySuit.size() == 1);
+
+        bool isStraight = false;
+        Card::Value highest;
+
+        map<Card::Value, set<Card::Suit> >::iterator it = cardsByValue.begin();
+        isStraight &= ((- it->first + (++it)->first) == 1);
+        isStraight &= ((- it->first + (++it)->first) == 1);
+        isStraight &= ((- it->first + (++it)->first) == 1);
+        isStraight &= ((- it->first + (++it)->first) == 1);
+
+        if(isStraight)
+            highest = cardsByValue.rbegin()->first;
 
         return Pair;
     }
