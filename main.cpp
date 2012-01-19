@@ -83,23 +83,6 @@ class Card
     }
 };
 
-struct CardComparer
-{
-    bool operator()(const Card & c0, const Card & c1)
-    {
-        if(c0.GetValue() < c1.GetValue())
-            return true;
-        else if(c0.GetValue() > c1.GetValue())
-            return false;
-        else if(c0.GetSuit() < c1.GetSuit())
-            return true;
-        else if(c0.GetSuit() > c1.GetSuit())
-            return false;
-
-        return false;
-    }
-};
-
 class HandSet
 {
     public :
@@ -177,19 +160,8 @@ class HandSet
 
 class Hand
 {
-    set<Card, CardComparer> cards;
-
     map<Card::Suit, set<Card::Value> > cardsBySuit;
     map<Card::Value, set<Card::Suit> > cardsByValue;
-
-    public:
-
-    void PushCard(Card c)
-    {
-        cards.insert(c);
-        cardsBySuit[c.GetSuit()].insert(c.GetValue());
-        cardsByValue[c.GetValue()].insert(c.GetSuit());
-    }
 
     inline bool CheckFor23Full4(HandSet & hs) const
     {
@@ -313,7 +285,15 @@ class Hand
         return true;
     }
 
-    inline HandSet GetFigure() const
+    public:
+
+    void PushCard(Card c)
+    {
+        cardsBySuit[c.GetSuit()].insert(c.GetValue());
+        cardsByValue[c.GetValue()].insert(c.GetSuit());
+    }
+
+    inline HandSet GetHandSet() const
     {
         HandSet ret(HandSet::HighCard, map<int, set<Card::Value> >(), map<int, set<Card::Value> >() );
 
@@ -335,5 +315,15 @@ class Hand
 
 int main()
 {
+    Hand h0, h1;
+
+    h0.PushCard(Card(Card::Club, Card::Jack));
+    h0.PushCard(Card(Card::Diamond, Card::Jack));
+    h0.PushCard(Card(Card::Spade, Card::Jack));
+    h0.PushCard(Card(Card::Heart, Card::Jack));
+    h0.PushCard(Card(Card::Club, Card::Two));
+
+    HandSet set = h0.GetHandSet();
+
     return 0;
 }
