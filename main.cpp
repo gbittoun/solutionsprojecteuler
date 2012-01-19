@@ -100,6 +100,28 @@ struct CardComparer
     }
 };
 
+class HandSet
+{
+    public :
+
+    enum Figure {HighCard = 0, Pair = 1, TwoPair = 2, ThreeOfAKind = 3, Straight = 4, Flush = 5, FullHouse = 6, FourOfAKind = 7, StraightFlush = 8};
+
+    private:
+
+    Figure f;
+    map<int, set<Card::Value> > valueInFigure;
+    map<int, set<Card::Value> > otherCards;
+
+    public:
+
+    HandSet(Figure _f, map<int, set<Card::Value> > _vif, map<int, set<Card::Value> > _oc) :
+        f(_f),
+        valueInFigure(_vif),
+        otherCards(_oc)
+    {
+    }
+};
+
 class Hand
 {
     set<Card, CardComparer> cards;
@@ -109,8 +131,6 @@ class Hand
 
     public:
 
-    enum Figure {HighCard = 0, Pair = 1, TwoPair = 2, ThreeOfAKind = 3, Straight = 4, Flush = 5, FullHouse = 6, FourOfAKind = 7, StraightFlush = 8};
-
     void PushCard(Card c)
     {
         cards.insert(c);
@@ -118,8 +138,10 @@ class Hand
         cardsByValue[c.GetValue()].insert(c.GetSuit());
     }
 
-    Figure GetFigure()
+    inline bool CheckFor23Full4(HandSet & hs) const
     {
+        set<Card::Value> otherValues;
+
         int pairs = 0;
         set<Card::Value> pairValues;
 
@@ -129,7 +151,7 @@ class Hand
         bool isFourOfAKind = false;
         Card::Value fourValue;
 
-        for(map<Card::Value, set<Card::Suit> >::iterator it = cardsByValue.begin() ; it != cardsByValue.end() ; ++it)
+        for(map<Card::Value, set<Card::Suit> >::const_iterator it = cardsByValue.begin() ; it != cardsByValue.end() ; ++it)
         {
             if(it->second.size() == 2)
             {
@@ -146,24 +168,115 @@ class Hand
                 isFourOfAKind = true;
                 fourValue = it->first;
             }
+            else
+                otherValues.insert(it->first);
         }
 
+        HandSet::Figure f = HandSet::HighCard;
+        map<int, set<Card::Value> > valueInFigure;
+        map<int, set<Card::Value> > otherCards;
+
+        if(isFourOfAKind)
+        {
+            f = HandSet::FourOfAKind;
+            valueInFigure[0].insert(fourValue);
+            otherCards[0] = otherValues;
+        }
+        else if(isThreeOfAKind && pairs == 1)
+        {
+            f = HandSet::FullHouse;
+            valueInFigure[0].insert(threeValue);
+            valueInFigure[1] = pairValues;
+            otherCards[0] = otherValues;
+        }
+        else if(isThreeOfAKind)
+        {
+            f = HandSet::ThreeOfAKind;
+            valueInFigure[0].insert(threeValue);
+            otherCards[0] = otherValues;
+        }
+        else if(pairs == 2)
+        {
+            f = HandSet::TwoPair;
+            valueInFigure[0].insert(*pairValues.rbegin());
+            valueInFigure[1].insert(*pairValues.begin());
+            otherCards[0] = otherValues;
+        }
+        else if(pairs == 1)
+        {
+            f = HandSet::Pair;
+            valueInFigure[0] = pairValues;
+            otherCards[0] = otherValues;
+        }
+        else
+            return false;
+
+        hs = HandSet(f, valueInFigure, otherCards);
+        return true;
+    }
+
+    inline bool CheckForFlushStraight(HandSet & hs) const
+    {
         bool isFlush = false;
         isFlush = (cardsBySuit.size() == 1);
 
         bool isStraight = false;
-        Card::Value highest;
+        set<Card::Value> values;
 
-        map<Card::Value, set<Card::Suit> >::iterator it = cardsByValue.begin();
+        map<Card::Value, set<Card::Suit> >::const_iterator it = cardsByValue.begin();
+        values.insert(it->first);
         isStraight &= ((- it->first + (++it)->first) == 1);
+        values.insert(it->first);
         isStraight &= ((- it->first + (++it)->first) == 1);
+        values.insert(it->first);
         isStraight &= ((- it->first + (++it)->first) == 1);
+        values.insert(it->first);
         isStraight &= ((- it->first + (++it)->first) == 1);
+        values.insert(it->first);
 
-        if(isStraight)
-            highest = cardsByValue.rbegin()->first;
+        HandSet::Figure f = HandSet::HighCard;
+        map<int, set<Card::Value> > valueInFigure;
+        map<int, set<Card::Value> > otherCards;
 
-        return Pair;
+        if(isFlush && isStraight)
+        {
+            f = HandSet::StraightFlush;
+            valueInFigure[0] = values;
+        }
+        else if(isFlush)
+        {
+            f = HandSet::Flush;
+            valueInFigure[0] = values;
+        }
+        else if(isStraight)
+        {
+            f = HandSet::Straight;
+            valueInFigure[0] = values;
+        }
+        else
+            return false;
+
+        hs = HandSet(f, valueInFigure, otherCards);
+        return true;
+    }
+
+    inline HandSet GetFigure() const
+    {
+        HandSet ret(HandSet::HighCard, map<int, set<Card::Value> >(), map<int, set<Card::Value> >() );
+
+        if(CheckFor23Full4(ret))
+            return ret;
+        else if(CheckForFlushStraight(ret))
+            return ret;
+        else
+        {
+            map<int, set<Card::Value> > highCardsValue;
+            for(map<Card::Value, set<Card::Suit> >::const_iterator it = cardsByValue.begin() ; it != cardsByValue.end() ; ++it)
+                highCardsValue[0].insert(it->first);
+
+            ret = HandSet(HandSet::HighCard, highCardsValue, map<int, set<Card::Value> >() );
+            return ret;
+        }
     }
 };
 
