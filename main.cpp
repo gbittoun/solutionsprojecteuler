@@ -104,6 +104,11 @@ class HandSet
     {
     }
 
+    Figure GetFigure() const
+    {
+        return f;
+    }
+
     int Compare(const HandSet & hs) const
     {
         if(f < hs.f)
@@ -245,19 +250,21 @@ class Hand
         bool isFlush = false;
         isFlush = (cardsBySuit.size() == 1);
 
-        bool isStraight = false;
+        bool isStraight = true;
         set<Card::Value> values;
 
-        map<Card::Value, set<Card::Suit> >::const_iterator it = cardsByValue.begin();
-        values.insert(it->first);
-        isStraight &= ((- it->first + (++it)->first) == 1);
-        values.insert(it->first);
-        isStraight &= ((- it->first + (++it)->first) == 1);
-        values.insert(it->first);
-        isStraight &= ((- it->first + (++it)->first) == 1);
-        values.insert(it->first);
-        isStraight &= ((- it->first + (++it)->first) == 1);
-        values.insert(it->first);
+        map<Card::Value, set<Card::Suit> >::const_iterator it0 = cardsByValue.begin();
+        map<Card::Value, set<Card::Suit> >::const_iterator it1 = it0;
+        ++it1;
+
+        for(int idx = 0 ; idx < 4 ; ++idx)
+        {
+            if(it1->first - it0->first != 1)
+                isStraight = false;
+
+            ++it0;
+            ++it1;
+        }
 
         HandSet::Figure f = HandSet::HighCard;
         map<int, set<Card::Value> > valueInFigure;
@@ -323,7 +330,17 @@ int main()
     h0.PushCard(Card(Card::Heart, Card::Jack));
     h0.PushCard(Card(Card::Club, Card::Two));
 
-    HandSet set = h0.GetHandSet();
+    h1.PushCard(Card(Card::Club, Card::Jack));
+    h1.PushCard(Card(Card::Diamond, Card::Queen));
+    h1.PushCard(Card(Card::Spade, Card::King));
+    h1.PushCard(Card(Card::Heart, Card::Ace));
+    h1.PushCard(Card(Card::Club, Card::Ten));
+
+    HandSet set0 = h0.GetHandSet();
+    HandSet set1 = h1.GetHandSet();
+
+    cout << set0.GetFigure() << "," << set1.GetFigure() << endl;
+    cout << set0.Compare(set1) << endl;
 
     return 0;
 }
