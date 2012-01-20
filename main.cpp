@@ -53,21 +53,135 @@ using namespace Computing;
 
 using namespace Poker;
 
+class HandParser
+{
+    public :
+
+    enum ParseStatus {Error = 0, Success = 1};
+
+    private :
+
+    string description;
+    string::const_iterator it;
+
+    ParseStatus errorFlag;
+
+    public :
+
+    HandParser(string description) :
+        description(description),
+        it(),
+        errorFlag(Success)
+    {
+        it = description.begin();
+    }
+
+    ParseStatus PopCard(Card & c)
+    {
+        if(errorFlag == Error)
+            return errorFlag;
+
+        while(it != description.end() && *it <= ' ')
+            ++it;
+
+        Card::Value v = Card::Queen;
+        Card::Suit s = Card::Heart;
+
+        switch(*it)
+        {
+            case '2':
+                v = Card::Two;
+                break;
+            case '3':
+                v = Card::Three;
+                break;
+            case '4':
+                v = Card::Four;
+                break;
+            case '5':
+                v = Card::Five;
+                break;
+            case '6':
+                v = Card::Six;
+                break;
+            case '7':
+                v = Card::Seven;
+                break;
+            case '8':
+                v = Card::Eight;
+                break;
+            case '9':
+                v = Card::Nine;
+                break;
+            case 'T':
+                v = Card::Ten;
+                break;
+            case 'J':
+                v = Card::Jack;
+                break;
+            case 'Q':
+                v = Card::Queen;
+                break;
+            case 'K':
+                v = Card::King;
+                break;
+            case 'A':
+                v = Card::Ace;
+                break;
+            default:
+                return (errorFlag = Error);
+                break;
+        }
+        ++it;
+
+        switch(*it)
+        {
+            case 'S':
+                s = Card::Spade;
+                break;
+            case 'H':
+                s = Card::Heart;
+                break;
+            case 'D':
+                s = Card::Diamond;
+                break;
+            case 'C':
+                s = Card::Club;
+                break;
+            default :
+                return (errorFlag = Error);
+                break;
+        }
+        ++it;
+
+        c = Card(s, v);
+        return (errorFlag = Success);
+    }
+};
+
 int main()
 {
+    string str("8C TS KC 9H 4S 7D 2S 5D 3S AC");
+    HandParser parser(str);
+
+    Card c;
     Hand h0, h1;
 
-    h0.PushCard(Card(Card::Club, Card::Jack));
-    h0.PushCard(Card(Card::Diamond, Card::Jack));
-    h0.PushCard(Card(Card::Spade, Card::Jack));
-    h0.PushCard(Card(Card::Heart, Card::Three));
-    h0.PushCard(Card(Card::Club, Card::Two));
+    for(int idx = 0 ; idx < 5 ; ++idx)
+    {
+        if(parser.PopCard(c))
+            h0.PushCard(c);
+        else
+            return 1;
+    }
 
-    h1.PushCard(Card(Card::Club, Card::Three));
-    h1.PushCard(Card(Card::Diamond, Card::King));
-    h1.PushCard(Card(Card::Heart, Card::Three));
-    h1.PushCard(Card(Card::Spade, Card::Three));
-    h1.PushCard(Card(Card::Spade, Card::King));
+    for(int idx = 0 ; idx < 5 ; ++idx)
+    {
+        if(parser.PopCard(c))
+            h1.PushCard(c);
+        else
+            return 1;
+    }
 
     HandSet set0 = h0.GetHandSet();
     HandSet set1 = h1.GetHandSet();

@@ -15,6 +15,7 @@ namespace Poker
 
         public:
 
+        Card();
         Card(Suit _s, Value _v);
         Suit GetSuit() const;
         Value GetValue() const;

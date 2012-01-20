@@ -2,6 +2,12 @@
 
 namespace Poker
 {
+    Card::Card() :
+        s(Card::Heart),
+        v(Card::Queen)
+    {
+    }
+
     Card::Card(Suit _s, Value _v) :
         s(_s),
         v(_v)
