@@ -4,31 +4,23 @@
 
 using namespace std;
 
-int is_palindrome(long long x, int base)
+long long MakePalindrome(long long x, int base)
 {
-    int num[128];
-    int size = 0;
-    int div = 1;
+    long long ret = 0;
 
-    while(x / div)
+    while(x > 0)
     {
-        div *= base;
-        ++size;
+        ret *= base;
+        ret += x % base;
+        x /= base;
     }
 
-    for(int idx = 0 ; idx < size ; ++idx)
-    {
-        num[idx] = (x % div) / (div / base);
-        div /= base;
-    }
+    return ret;
+}
 
-    for(int idx = 0 ; idx < size / 2; ++idx)
-    {
-        if(num[idx] != num[size - idx - 1])
-            return 0;
-    }
-
-    return 1;
+int IsPalindrome(long long x, int base)
+{
+    return x == MakePalindrome(x, base);
 }
 
 int problem_4()
@@ -38,7 +30,7 @@ int problem_4()
     for(int a = 999, b = 999 ; (a > 100) || ( (a = 999) && (--b > 100) ) ; --a )
     {
         long long result = a * b;
-        if(is_palindrome(result, 10) && (highest_palindrome < (result)))
+        if(IsPalindrome(result, 10) && (highest_palindrome < (result)))
         {
             res_a = a;
             res_b = b;

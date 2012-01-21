@@ -1,2 +1,3 @@
-int is_palindrome(long long x, int base);
+long long MakePalindrome(long long x, int base);
+int IsPalindrome(long long x, int base);
 int problem_4();

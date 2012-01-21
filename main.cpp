@@ -51,6 +51,31 @@
 using namespace std;
 using namespace Computing;
 
+namespace Computing
+{
+    template<int N>
+    FatNumber<N> MakePalindrome(const FatNumber<N> & x)
+    {
+        FatNumber<N> ret;
+
+        bool startReverse = false;
+        int outIdx = 0;
+        for(int idx = (sizeof(x.v) / sizeof(int)) - 1 ; idx >= 0 ; --idx)
+        {
+            if((x.v[idx] > 0) && !startReverse)
+            {
+                ret.v[outIdx++] = ::MakePalindrome(x.v[idx], 10);
+            }
+            else if(startReverse)
+            {
+                ret.v[outIdx++] = ::MakePalindrome(x.v[idx], 10);
+            }
+        }
+
+        return ret;
+    }
+}
+
 int main()
 {
     return problem_56();

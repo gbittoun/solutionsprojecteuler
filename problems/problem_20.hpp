@@ -158,6 +158,9 @@ namespace Computing
 
         template<int M>
         friend ostream & operator<<(ostream & o, const FatNumber<M> & x);
+
+        template<int M>
+        friend FatNumber<M> MakePalindrome(const FatNumber<M> & x);
     };
 
     template<int N>

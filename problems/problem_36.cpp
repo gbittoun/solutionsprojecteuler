@@ -29,7 +29,7 @@ int problem_36()
 
     for(long long idx = 0 ; idx < 1000000 ; ++idx)
     {
-        if(is_palindrome(idx, 10) && is_palindrome(idx, 2))
+        if(IsPalindrome(idx, 10) && IsPalindrome(idx, 2))
         {
             DumpNumber(idx, 10);
             cout << " ";
