@@ -51,26 +51,50 @@
 using namespace std;
 using namespace Computing;
 
+#include <vector>
+
 namespace Computing
 {
     template<int N>
     FatNumber<N> MakePalindrome(const FatNumber<N> & x)
     {
-        FatNumber<N> ret;
+        int limit = (sizeof(x.v) / sizeof(int)) - 1;
+        int idx = 0;
 
-        bool startReverse = false;
-        int outIdx = 0;
-        for(int idx = (sizeof(x.v) / sizeof(int)) - 1 ; idx >= 0 ; --idx)
+        while(limit > 0 && x.v[limit] == 0)
+            --limit;
+
+        vector<char> digits;
+
+        while(idx <= limit)
         {
-            if((x.v[idx] > 0) && !startReverse)
+            int tmp = x.v[idx++];
+            while(tmp > 0)
             {
-                ret.v[outIdx++] = ::MakePalindrome(x.v[idx], 10);
-            }
-            else if(startReverse)
-            {
-                ret.v[outIdx++] = ::MakePalindrome(x.v[idx], 10);
+                digits.push_back(tmp % 10);
+                tmp /= 10;
             }
         }
+
+        idx = 0;
+        int buf = 0, count = 0, factor = 1;
+        FatNumber<N> ret;
+
+        for(vector<char>::reverse_iterator it = digits.rbegin() ; it != digits.rend() ; ++it)
+        {
+            buf += *it * factor;
+            ++count;
+            factor *= 10;
+
+            if(count == 4)
+            {
+                ret.v[idx++] = buf;
+                buf /= 10000;
+                count = 0;
+                factor = 1;
+            }
+        }
+        ret.v[idx++] = buf;
 
         return ret;
     }
@@ -78,5 +102,9 @@ namespace Computing
 
 int main()
 {
-    return problem_56();
+    FatNumber<1024> a = 12;
+
+    cout << MakePalindrome<1024>(a) << endl;
+
+    return 0;
 }
