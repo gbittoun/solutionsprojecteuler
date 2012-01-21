@@ -6,10 +6,10 @@ namespace Computing
 {
     using namespace std;
 
-    template<int n>
+    template<int N>
     class FatNumber
     {
-        int v[n];
+        int v[N];
 
         void Spread()
         {
@@ -27,19 +27,19 @@ namespace Computing
 
         FatNumber()
         {
-            memset(v, 0, n * sizeof(int));
+            memset(v, 0, N * sizeof(int));
         }
 
         FatNumber(int a)
         {
-            memset(v, 0, n * sizeof(int));
+            memset(v, 0, N * sizeof(int));
             v[0] = a;
             Spread();
         }
 
         FatNumber & operator=(int x)
         {
-            memset(v, 0, n * sizeof(int));
+            memset(v, 0, N * sizeof(int));
             v[0] = x;
 
             Spread();
@@ -47,9 +47,9 @@ namespace Computing
             return *this;
         }
 
-        FatNumber & operator+=(FatNumber<n> & x)
+        FatNumber & operator+=(FatNumber<N> & x)
         {
-            for(int idx = 0 ; idx < n ; ++idx)
+            for(int idx = 0 ; idx < N ; ++idx)
             {
                 v[idx] += x.v[idx];
             }
@@ -59,7 +59,7 @@ namespace Computing
             return *this;
         }
 
-        FatNumber & operator*=(FatNumber<n> & number)
+        FatNumber & operator*=(FatNumber<N> & number)
         {
             for(size_t idx = 0 ; idx < (sizeof(v) / sizeof(int)) ; ++idx)
             {
@@ -81,7 +81,7 @@ namespace Computing
             return *this;
         }
 
-        FatNumber & operator=(FatNumber<n> x)
+        FatNumber & operator=(FatNumber<N> x)
         {
             memcpy(v, x.v, sizeof(v));
 
@@ -116,25 +116,6 @@ namespace Computing
             return ret;
         }
 
-        void Print()
-        {
-            bool youcanprint = false;
-            for(int idx = (sizeof(v) / sizeof(int)) - 1 ; idx >= 0 ; --idx)
-            {
-                if (!youcanprint && v[idx] != 0)
-                    youcanprint = true;
-
-                if(youcanprint)
-                {
-                    int printable = v[idx];
-                    cout << printable / 1000;printable = printable - (printable / 1000) * 1000;
-                    cout << printable / 100;printable = printable - (printable / 100) * 100;
-                    cout << printable / 10;printable = printable - (printable / 10) * 10;
-                    cout << printable;
-                }
-            }
-        }
-
         int SumOfDigits()
         {
             int sum = 0;
@@ -152,7 +133,7 @@ namespace Computing
             return sum;
         }
 
-        bool operator<(const FatNumber<n> & number) const
+        bool operator<(const FatNumber<N> & number) const
         {
             for(int idx = (sizeof(v) / sizeof(int)) - 1 ; idx >= 0 ; --idx)
             {
@@ -169,52 +150,32 @@ namespace Computing
         {
             public :
 
-            bool operator()(const FatNumber<n> & a, const FatNumber<n> & b)
+            bool operator()(const FatNumber<N> & a, const FatNumber<N> & b)
             {
                 return a < b;
             }
         };
 
-
-        template<int N>
-        friend fstream & operator<<(fstream & o, FatNumber<N> number);
-
-        template<int N>
-        friend ostream & operator<<(ostream & o, FatNumber<N> number);
-
+        template<int M>
+        friend ostream & operator<<(ostream & o, const FatNumber<M> & x);
     };
 
-    template<int n>
-    fstream & operator<<(fstream & o, FatNumber<n> number)
+    template<int N>
+    ostream & operator<<(ostream & o, const FatNumber<N> & x)
     {
         bool youcanprint = false;
-        for(int idx = n - 1 ; idx >= 0 ; --idx)
+        for(int idx = (sizeof(x.v) / sizeof(int)) - 1 ; idx >= 0 ; --idx)
         {
-            if(youcanprint)
-                o << number.v[idx];
-            else if (number.v[idx] != 0)
-            {
-                youcanprint = true;
-                o << number.v[idx];
-            }
-        }
-
-        return o;
-    }
-
-    template<int n>
-    ostream & operator<<(ostream & o, FatNumber<n> number)
-    {
-        bool youcanprint = false;
-        for(int idx = n - 1 ; idx >= 0 ; --idx)
-        {
-            if(youcanprint)
-                o << number.v[idx];
-            else if (number.v[idx] != 0)
-            {
+            if (!youcanprint && x.v[idx] != 0)
                 youcanprint = true;
 
-                o << number.v[idx];
+            if(youcanprint)
+            {
+                int printable = x.v[idx];
+                cout << printable / 1000;printable = printable - (printable / 1000) * 1000;
+                cout << printable / 100;printable = printable - (printable / 100) * 100;
+                cout << printable / 10;printable = printable - (printable / 10) * 10;
+                cout << printable;
             }
         }
 

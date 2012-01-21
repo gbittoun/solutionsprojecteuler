@@ -9,13 +9,11 @@ int problem_20()
 
     for(int idx = 2 ; idx <= 100 ; ++idx)
     {
-        x.Print();
-        cout << endl;
+        cout << x << endl;
         x = x*idx;
     }
 
-    x.Print();
-    cout << endl << endl;
+    cout << x << endl << endl;
 
     cout << x.SumOfDigits() << endl;
 
