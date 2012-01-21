@@ -98,13 +98,46 @@ namespace Computing
 
         return ret;
     }
+
+    template<int N>
+    bool IsPalindrome(const FatNumber<N> & x)
+    {
+        return (x == MakePalindrome<N>(x));
+    }
 }
 
 int main()
 {
-    FatNumber<1024> a = 12;
+    long long sum = 0;
 
-    cout << MakePalindrome<1024>(a) << endl;
+    for(int idx = 10677 ; idx < 10678 ; ++idx)
+    {
+        FatNumber<1024> a = idx;
+        FatNumber<1024> b = MakePalindrome(a);
+
+        bool p = true;
+        for(int jdx = 0 ; jdx < 600 ; ++jdx)
+        {
+            cout << a << " + " << b << " = ";
+            FatNumber<1024> c = (a + b);
+            cout << c << endl;
+
+            a = c;
+            b = MakePalindrome(a);
+
+
+            if(IsPalindrome(c))
+            {
+                p = false;
+                break;
+            }
+        }
+
+        if(p)
+            ++sum;
+    }
+
+    cout << sum << endl;
 
     return 0;
 }

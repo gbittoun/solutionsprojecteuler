@@ -47,7 +47,30 @@ namespace Computing
             return *this;
         }
 
-        FatNumber & operator+=(FatNumber<N> & x)
+        bool operator==(const FatNumber<N> & x) const
+        {
+            for(int idx = 0 ; idx < N ; ++idx)
+                if(v[idx] != x.v[idx])
+                    return false;
+
+            return true;
+        }
+
+        FatNumber<N> operator+(FatNumber<N> & x)
+        {
+            FatNumber<N> ret;
+
+            for(int idx = 0 ; idx < N ; ++idx)
+            {
+                ret.v[idx] = this->v[idx] + x.v[idx];
+            }
+
+            ret.Spread();
+
+            return ret;
+        }
+
+        FatNumber<N> & operator+=(FatNumber<N> & x)
         {
             for(int idx = 0 ; idx < N ; ++idx)
             {
@@ -59,7 +82,7 @@ namespace Computing
             return *this;
         }
 
-        FatNumber & operator*=(FatNumber<N> & number)
+        FatNumber<N> & operator*=(FatNumber<N> & number)
         {
             for(size_t idx = 0 ; idx < (sizeof(v) / sizeof(int)) ; ++idx)
             {
