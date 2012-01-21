@@ -138,6 +138,8 @@
 		<Unit filename="problems/problem_55.hpp" />
 		<Unit filename="problems/problem_56.cpp" />
 		<Unit filename="problems/problem_56.hpp" />
+		<Unit filename="problems/problem_57.cpp" />
+		<Unit filename="problems/problem_57.hpp" />
 		<Unit filename="problems/problem_7.cpp" />
 		<Unit filename="problems/problem_7.hpp" />
 		<Unit filename="problems/problem_8.cpp" />

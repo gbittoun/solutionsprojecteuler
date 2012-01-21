@@ -48,11 +48,12 @@
 #include "problems/problem_54.hpp"
 #include "problems/problem_55.hpp"
 #include "problems/problem_56.hpp"
+#include "problems/problem_57.hpp"
 
 using namespace std;
 using namespace Computing;
 
 int main()
 {
-    return problem_55();
+    return problem_57();
 }

@@ -4,23 +4,27 @@
 
 using namespace std;
 
-int pgcd(int a, int b)
+long long pgcd(long long a, long long b)
 {
     if(a == b)
         return a;
     else if(a > b)
     {
-        if(a % b == 0)
+        long long tmp = a % b;
+
+        if(tmp == 0)
             return b;
         else
-            return pgcd(a-b, b);
+            return pgcd(tmp, b);
     }
     else
     {
-        if(b % a == 0)
+        long long tmp = b % a;
+
+        if(tmp == 0)
             return a;
         else
-            return pgcd(b-a, a);
+            return pgcd(tmp, a);
     }
 }
 

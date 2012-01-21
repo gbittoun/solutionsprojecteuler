@@ -37,11 +37,10 @@ namespace Computing
             Spread();
         }
 
-        FatNumber & operator=(int x)
+        FatNumber<N> & operator=(int x)
         {
             memset(v, 0, N * sizeof(int));
             v[0] = x;
-
             Spread();
 
             return *this;
@@ -56,13 +55,13 @@ namespace Computing
             return true;
         }
 
-        FatNumber<N> operator+(FatNumber<N> & x)
+        FatNumber<N> operator+(const FatNumber<N> & x)
         {
             FatNumber<N> ret;
 
             for(int idx = 0 ; idx < N ; ++idx)
             {
-                ret.v[idx] = this->v[idx] + x.v[idx];
+                ret.v[idx] = v[idx] + x.v[idx];
             }
 
             ret.Spread();
@@ -92,16 +91,18 @@ namespace Computing
             }
         }
 
-        FatNumber & operator*(int x)
+        FatNumber<N> operator*(int x)
         {
+            FatNumber<N> ret;
+
             for(size_t idx = 0 ; idx < (sizeof(v) / sizeof(int)) ; ++idx)
             {
-                v[idx] *= x;
+                ret.v[idx] = this->v[idx] * x;
             }
 
-            Spread();
+            ret.Spread();
 
-            return *this;
+            return ret;
         }
 
         FatNumber & operator=(FatNumber<N> x)

@@ -1,2 +1,2 @@
-int pgcd(int a, int b);
+long long pgcd(long long a, long long b);
 int problem_15();
