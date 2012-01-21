@@ -69,10 +69,21 @@ namespace Computing
         while(idx <= limit)
         {
             int tmp = x.v[idx++];
-            while(tmp > 0)
+            if(idx == (limit+1))
             {
-                digits.push_back(tmp % 10);
-                tmp /= 10;
+                while(tmp > 0)
+                {
+                    digits.push_back(tmp % 10);
+                    tmp /= 10;
+                }
+            }
+            else
+            {
+                for(int count = 0 ; count < 4 ; ++count)
+                {
+                    digits.push_back(tmp % 10);
+                    tmp /= 10;
+                }
             }
         }
 
@@ -110,13 +121,13 @@ int main()
 {
     long long sum = 0;
 
-    for(int idx = 10677 ; idx < 10678 ; ++idx)
+    for(int idx = 1 ; idx < 10000 ; ++idx)
     {
         FatNumber<1024> a = idx;
         FatNumber<1024> b = MakePalindrome(a);
 
         bool p = true;
-        for(int jdx = 0 ; jdx < 600 ; ++jdx)
+        for(int jdx = 0 ; jdx < 50 ; ++jdx)
         {
             cout << a << " + " << b << " = ";
             FatNumber<1024> c = (a + b);
