@@ -30,6 +30,13 @@ namespace Computing
             memset(v, 0, n * sizeof(int));
         }
 
+        FatNumber(int a)
+        {
+            memset(v, 0, n * sizeof(int));
+            v[0] = a;
+            Spread();
+        }
+
         FatNumber & operator=(int x)
         {
             memset(v, 0, n * sizeof(int));
@@ -114,12 +121,16 @@ namespace Computing
             bool youcanprint = false;
             for(int idx = (sizeof(v) / sizeof(int)) - 1 ; idx >= 0 ; --idx)
             {
-                if(youcanprint)
-                    cout << v[idx];
-                else if (v[idx] != 0)
-                {
+                if (!youcanprint && v[idx] != 0)
                     youcanprint = true;
-                    cout << v[idx];
+
+                if(youcanprint)
+                {
+                    int printable = v[idx];
+                    cout << printable / 1000;printable = printable - (printable / 1000) * 1000;
+                    cout << printable / 100;printable = printable - (printable / 100) * 100;
+                    cout << printable / 10;printable = printable - (printable / 10) * 10;
+                    cout << printable;
                 }
             }
         }
@@ -210,3 +221,5 @@ namespace Computing
         return o;
     }
 }
+
+int problem_20();
