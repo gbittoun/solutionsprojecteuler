@@ -49,6 +49,7 @@
 #include "problems/problem_55.hpp"
 #include "problems/problem_56.hpp"
 #include "problems/problem_57.hpp"
+#include "problems/problem_58.hpp"
 #include "problems/problem_76.hpp"
 
 using namespace std;
@@ -56,5 +57,5 @@ using namespace Computing;
 
 int main()
 {
-    return problem_76();
+    return problem_58();
 }
