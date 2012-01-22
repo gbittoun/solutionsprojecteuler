@@ -7,7 +7,7 @@ using namespace std;
 
 namespace Computing
 {
-    void Combine(set<int> & coins, set<int>::iterator it, int val, int & count)
+    void Combine(set<int> & coins, set<int>::iterator it, int val, long long & count)
     {
         while(it != coins.end())
         {
@@ -34,7 +34,7 @@ int problem_31()
     coins.insert(100);
     coins.insert(200);
 
-    int count = 0;
+    long long count = 0;
 
     Computing::Combine(coins, coins.begin(), 200, count);
 
