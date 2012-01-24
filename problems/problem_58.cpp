@@ -4,25 +4,29 @@
 
 using namespace std;
 
+#include "problem_58.hpp"
 #include "problem_37.hpp"
 
-bool IsPrime(set<long long> & p, long long n)
+namespace Computing
 {
-    if(p.find(n) != p.end())
-        return true;
-
-    set<long long>::iterator it = p.begin();
-    while(it != p.end())
+    bool IsPrime(set<long long> & p, long long n)
     {
-        if(n % *it == 0)
-            return false;
-        else if(*it > ceil(sqrt(n)))
+        if(p.find(n) != p.end())
             return true;
 
-        ++it;
-    }
+        set<long long>::iterator it = p.begin();
+        while(it != p.end())
+        {
+            if(n % *it == 0)
+                return false;
+            else if(*it > ceil(sqrt(n)))
+                return true;
 
-    return true;
+            ++it;
+        }
+
+        return true;
+    }
 }
 
 using namespace Computing;

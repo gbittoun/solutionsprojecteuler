@@ -83,50 +83,39 @@ int main()
     set<long long> primes;
     FillPrimes(primes, 1000000LL);
 
-    set<long long>::iterator it0 = primes.begin();
-
-    for(; *it0 < 1000 ; ++it0)
+    for(set<long long>::iterator it0 = primes.begin() ; it0 != primes.end() ; ++it0)
     {
         for(set<long long>::iterator it1 = primes.begin() ; *it1 < *it0 ; ++it1)
         {
-            for(set<long long>::iterator it2 = primes.begin() ; *it2 < *it1 ; ++it2)
+            if(IsPrime(primes, ConcatInt(*it0, *it1)) && IsPrime(primes, ConcatInt(*it1, *it0)))
             {
-                for(set<long long>::iterator it3 = primes.begin() ; *it3 < *it2 ; ++it3)
+                for(set<long long>::iterator it2 = primes.begin() ; *it2 < *it1 ; ++it2)
                 {
-                    for(set<long long>::iterator it4 = primes.begin() ; *it4 < *it3 ; ++it4)
+                    if(IsPrime(primes, ConcatInt(*it0, *it2)) && IsPrime(primes, ConcatInt(*it1, *it2)) &&
+                       IsPrime(primes, ConcatInt(*it2, *it0)) && IsPrime(primes, ConcatInt(*it2, *it1)))
                     {
-                        long long p0 = ConcatInt(*it0, *it1);
-                        long long p1 = ConcatInt(*it1, *it0);
-                        long long p2 = ConcatInt(*it0, *it2);
-                        long long p3 = ConcatInt(*it2, *it0);
-                        long long p4 = ConcatInt(*it1, *it2);
-                        long long p5 = ConcatInt(*it1, *it2);
-                        long long p6 = ConcatInt(*it0, *it3);
-                        long long p7 = ConcatInt(*it3, *it0);
-                        long long p8 = ConcatInt(*it1, *it3);
-                        long long p9 = ConcatInt(*it3, *it1);
-                        long long p10 = ConcatInt(*it2, *it3);
-                        long long p11 = ConcatInt(*it3, *it2);
-                        long long p12 = ConcatInt(*it0, *it4);
-                        long long p13 = ConcatInt(*it4, *it2);
+                        for(set<long long>::iterator it3 = primes.begin() ; *it3 < *it2 ; ++it3)
+                        {
+                            if(IsPrime(primes, ConcatInt(*it0, *it3)) && IsPrime(primes, ConcatInt(*it3, *it0)) &&
+                               IsPrime(primes, ConcatInt(*it1, *it3)) && IsPrime(primes, ConcatInt(*it3, *it1)) &&
+                               IsPrime(primes, ConcatInt(*it2, *it3)) && IsPrime(primes, ConcatInt(*it3, *it2))
+                               )
+                            {
+                                cout << *it0 << "," << *it1 << "," << *it2 << "," << *it3 << " MAYBE ?" << endl;
 
-                        if(
-                           primes.find(p0) != primes.end() &&
-                           primes.find(p1) != primes.end() &&
-                           primes.find(p2) != primes.end() &&
-                           primes.find(p3) != primes.end() &&
-                           primes.find(p4) != primes.end() &&
-                           primes.find(p5) != primes.end() &&
-                           primes.find(p6) != primes.end() &&
-                           primes.find(p7) != primes.end() &&
-                           primes.find(p8) != primes.end() &&
-                           primes.find(p9) != primes.end() &&
-                           primes.find(p10) != primes.end() &&
-                           primes.find(p11) != primes.end() &&
-                           primes.find(p12) != primes.end() &&
-                           primes.find(p13) != primes.end()
-                           )
-                            cout << *it0 << "," << *it1 << "," << *it2 << "," << *it3 << "," << *it4 << endl;
+                                for(set<long long>::iterator it4 = primes.begin() ; *it4 < *it3 ; ++it4)
+                                {
+                                    if(IsPrime(primes, ConcatInt(*it0, *it4)) && IsPrime(primes, ConcatInt(*it4, *it0)) &&
+                                       IsPrime(primes, ConcatInt(*it1, *it4)) && IsPrime(primes, ConcatInt(*it4, *it1)) &&
+                                       IsPrime(primes, ConcatInt(*it2, *it4)) && IsPrime(primes, ConcatInt(*it4, *it2)) &&
+                                       IsPrime(primes, ConcatInt(*it3, *it4)) && IsPrime(primes, ConcatInt(*it4, *it3))
+                                       )
+                                    {
+                                        cout << *it0 << "," << *it1 << "," << *it2 << "," << *it3 << "," << *it4 << endl;
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
