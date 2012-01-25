@@ -15,10 +15,10 @@ namespace Computing
         {
             for(size_t idx = 0 ; idx < (sizeof(v) / sizeof(int)) - 1 ; ++idx)
             {
-                if(v[idx] >= 10000)
+                if(v[idx] >= 1000)
                 {
-                    v[idx+1] += v[idx] / 10000;
-                    v[idx] %= 10000;
+                    v[idx+1] += v[idx] / 1000;
+                    v[idx] %= 1000;
                 }
             }
         }
@@ -46,6 +46,13 @@ namespace Computing
             return *this;
         }
 
+        FatNumber<N> & operator=(const FatNumber<N> x)
+        {
+            memcpy(v, x.v, sizeof(v));
+
+            return *this;
+        }
+
         bool operator==(const FatNumber<N> & x) const
         {
             for(int idx = 0 ; idx < N ; ++idx)
@@ -55,7 +62,7 @@ namespace Computing
             return true;
         }
 
-        FatNumber<N> operator+(const FatNumber<N> & x)
+        FatNumber<N> operator+(const FatNumber<N> & x) const
         {
             FatNumber<N> ret;
 
@@ -69,7 +76,7 @@ namespace Computing
             return ret;
         }
 
-        FatNumber<N> & operator+=(FatNumber<N> & x)
+        FatNumber<N> & operator+=(const FatNumber<N> & x)
         {
             for(int idx = 0 ; idx < N ; ++idx)
             {
@@ -81,21 +88,33 @@ namespace Computing
             return *this;
         }
 
-        FatNumber<N> & operator*=(FatNumber<N> & number)
+        FatNumber<N> & operator*=(const FatNumber<N> & x)
         {
-            for(size_t idx = 0 ; idx < (sizeof(v) / sizeof(int)) ; ++idx)
-            {
-                *this *= number.v[idx];
-
-                Spread();
-            }
+            *this = *this * x;
+            return *this;
         }
 
-        FatNumber<N> operator*(int x)
+        FatNumber<N> operator*(const FatNumber<N> & x) const
         {
             FatNumber<N> ret;
 
-            for(size_t idx = 0 ; idx < (sizeof(v) / sizeof(int)) ; ++idx)
+            for(int idx = 0 ; idx < N ; ++idx)
+            {
+                for(int jdx = 0 ; jdx < N-idx ; ++jdx)
+                {
+                    ret.v[idx+jdx] += v[jdx] * x.v[idx];
+                }
+                ret.Spread();
+            }
+
+            return ret;
+        }
+
+        FatNumber<N> operator*(int x) const
+        {
+            FatNumber<N> ret;
+
+            for(size_t idx = 0 ; idx < N ; ++idx)
             {
                 ret.v[idx] = this->v[idx] * x;
             }
@@ -105,11 +124,19 @@ namespace Computing
             return ret;
         }
 
-        FatNumber & operator=(FatNumber<N> x)
+        FatNumber<N> & operator<<(int x)
         {
-            memcpy(v, x.v, sizeof(v));
+            int tmp[N];
 
-            return *this;
+            for(int idx = 0 ; idx < N ; ++idx)
+            {
+                if(idx < x)
+                    tmp[idx] = 0;
+                else
+                    tmp[idx] = v[idx-x];
+            }
+
+            memcpy(v, tmp, N*sizeof(int));
         }
 
         int NbDigits() const
@@ -127,9 +154,7 @@ namespace Computing
 
             if(ret != -1)
             {
-                if(v[ret] / 1000)
-                    return ret*4 + 4;
-                else if(v[ret] / 100)
+                if(v[ret] / 100)
                     return ret*4 + 3;
                 else if(v[ret] / 10)
                     return ret*4 + 2;
@@ -199,7 +224,6 @@ namespace Computing
             if(youcanprint)
             {
                 int printable = x.v[idx];
-                cout << printable / 1000;printable = printable - (printable / 1000) * 1000;
                 cout << printable / 100;printable = printable - (printable / 100) * 100;
                 cout << printable / 10;printable = printable - (printable / 10) * 10;
                 cout << printable;
