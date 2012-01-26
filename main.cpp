@@ -52,67 +52,13 @@
 #include "problems/problem_58.hpp"
 #include "problems/problem_59.hpp"
 #include "problems/problem_60.hpp"
+#include "problems/problem_62.hpp"
 #include "problems/problem_76.hpp"
 
 using namespace std;
 using namespace Computing;
 
-template<int N>
-FatNumber<N> Combination(long long n, long long p)
-{
-    if(n < p)
-        return 0;
-
-    static map<long long, map<long long, FatNumber<N> > > pascal_triangle;
-
-    if(pascal_triangle.size() == 0)
-        pascal_triangle[0][0] = pascal_triangle[1][0] = pascal_triangle[1][1] = 1;
-
-    map<long long, map<long long, FatNumber<32> > >::iterator it_n = pascal_triangle.find(n);
-    if(it_n == pascal_triangle.end())
-    {
-        long long n_min = pascal_triangle.rbegin()->first + 1;
-
-        for(long long idx = n_min ; idx <= n ; ++idx)
-        {
-            pascal_triangle[idx][0] = pascal_triangle[idx][idx] = 1;
-
-            for(long long jdx = 1 ; jdx < idx ; ++jdx)
-            {
-                pascal_triangle[idx][jdx] = pascal_triangle[idx-1][jdx-1] + pascal_triangle[idx-1][jdx];
-            }
-        }
-    }
-
-    return pascal_triangle[n][p];
-}
-
 int main()
 {
-//    FatNumber<32> a = 1;
-//
-//    for(int idx = 0 ; idx < 8 ; ++idx)
-//    {
-//        a *= Combination<32>(54-(7+2*idx), 2);
-//        cout << idx+1 << " : " << a << endl;
-//    }
-
-    map<map<char,int>, set<long long>, DigitsComparer> buffer;
-
-    for(long long idx = 1 ; idx < 1000000000LL ; ++idx)
-    {
-        map<char, int> digits;
-        DigitsDecompose<10>(idx*idx*idx, digits);
-        buffer[digits].insert(idx*idx*idx);
-        if(buffer[digits].size() >= 5)
-        {
-            cout << buffer.size() << endl << endl;
-            for(set<long long>::iterator it = buffer[digits].begin() ; it != buffer[digits].end() ; ++it)
-                cout << *it << endl;
-
-            break;
-        }
-    }
-
-    return 0;
+    return problem_62();
 }
