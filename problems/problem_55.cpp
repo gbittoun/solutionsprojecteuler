@@ -2,7 +2,8 @@
 
 using namespace std;
 
-#include "problem_20.hpp"
+#include "../Computing/FatNumber/Palindrome.hpp"
+
 #include "problem_55.hpp"
 
 using namespace Computing;

@@ -1,7 +1,8 @@
-#include "problem_20.hpp"
 #include "problem_29.hpp"
 
 #include <set>
+
+#include "../Computing/FatNumber/Power.hpp"
 
 using namespace std;
 using namespace Computing;
@@ -12,7 +13,7 @@ int problem_29()
 
     for(int idx = 2, jdx = 2 ; (idx <= 100) || ((idx = 2) && (++jdx <= 100)) ; ++idx)
     {
-        FatNumber<1024> res = power<1024>(idx, jdx);
+        FatNumber<1024> res = FatPower<1024>(idx, jdx);
 
         if(numbers.find(res) == numbers.end())
             numbers.insert(res);

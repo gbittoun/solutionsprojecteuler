@@ -33,6 +33,9 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="Computing/Combination.hpp" />
+		<Unit filename="Computing/FatNumber/FatNumber.hpp" />
+		<Unit filename="Computing/FatNumber/Palindrome.hpp" />
+		<Unit filename="Computing/FatNumber/Power.hpp" />
 		<Unit filename="PokerGame/Card.cpp" />
 		<Unit filename="PokerGame/Card.hpp" />
 		<Unit filename="PokerGame/Hand.cpp" />

@@ -1,6 +1,6 @@
-#include "problem_20.hpp"
-
 #include "problem_56.hpp"
+
+#include "../Computing/FatNumber/Power.hpp"
 
 using namespace Computing;
 

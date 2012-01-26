@@ -1,6 +1,6 @@
 #include "problem_25.hpp"
 
-#include "problem_20.hpp"
+#include "../Computing/FatNumber/FatNumber.hpp"
 
 using namespace Computing;
 
