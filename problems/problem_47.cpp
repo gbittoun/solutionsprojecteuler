@@ -9,40 +9,7 @@ using namespace std;
 #include "problem_47.hpp"
 #include "problem_37.hpp"
 
-namespace Computing
-{
-    void Decompose(long long n, set<long long> & primes, map<long long, int> & pd)
-    {
-        set<long long>::iterator it = primes.begin();
-        while(it != primes.end())
-        {
-            while(n % *it == 0)
-            {
-                ++pd[*it];
-                n /= *it;
-            }
-
-            if(*it > sqrt(ceil(n)))
-                break;
-
-            ++it;
-        }
-
-        if(n > 1)
-            ++pd[n];
-    }
-
-    void DumpDecomposition(map<long long, int> & pd)
-    {
-        map<long long, int>::iterator it = pd.begin();
-        while(it != pd.end())
-        {
-            cout << it->first << " : " << it->second << " , ";
-            ++it;
-        }
-        cout << endl;
-    }
-}
+#include "../Computing/IntegerOperations.hpp"
 
 int problem_47()
 {

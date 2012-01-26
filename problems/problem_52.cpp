@@ -5,6 +5,8 @@
 #include <vector>
 #include <map>
 
+#include "../Computing/DigitsOperations.hpp"
+
 using namespace std;
 using namespace Computing;
 

@@ -6,6 +6,8 @@
 
 #include "problem_37.hpp"
 
+#include "../Computing/IntegerOperations.hpp"
+
 using namespace std;
 using namespace Computing;
 

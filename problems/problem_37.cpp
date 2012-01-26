@@ -6,43 +6,7 @@
 
 using namespace std;
 
-namespace Computing
-{
-    void FillPrimes(set<long long> & primes, long long max)
-    {
-        primes.clear();
-
-        primes.insert(2);
-
-        for(long long idx = 3 ; idx < max ; ++idx)
-        {
-            bool isPrime = true;
-
-            set<long long>::iterator it = primes.begin();
-            while(it != primes.end())
-            {
-                if(idx % *it == 0)
-                {
-                    isPrime = false;
-                    break;
-                }
-                else if(*it > ceil(sqrt(idx)))
-                    break;
-
-                ++it;
-            }
-
-            if(isPrime)
-                primes.insert(idx);
-
-            if(idx % 100000 == 0)
-                cout << idx << endl;
-        }
-
-        cout << "Primes computing finished !" << endl << endl;
-    }
-}
-
+#include "../Computing/IntegerOperations.hpp"
 
 int problem_37()
 {

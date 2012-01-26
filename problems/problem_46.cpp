@@ -6,6 +6,8 @@
 #include <iostream>
 #include <math.h>
 
+#include "../Computing/IntegerOperations.hpp"
+
 using namespace std;
 
 bool Test(set<long long> & p, long long idx)

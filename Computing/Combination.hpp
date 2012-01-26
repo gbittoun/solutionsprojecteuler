@@ -1,6 +1,9 @@
 #ifndef COMBINATION_HPP
 #define COMBINATION_HPP
 
+#include "FatNumber/FatNumber.hpp"
+
+#include <set>
 #include <map>
 
 namespace Computing
@@ -36,6 +39,8 @@ namespace Computing
 
         return pascal_triangle[n][p];
     }
+
+    void Combine(set<int> & coins, set<int>::iterator it, int val, long long & count);
 }
 
 #endif

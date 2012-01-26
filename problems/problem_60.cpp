@@ -3,11 +3,13 @@
 #include <iostream>
 #include <set>
 
-using namespace std;
 
 #include "problem_37.hpp"
 #include "problem_58.hpp"
 
+#include "../Computing/IntegerOperations.hpp"
+
+using namespace std;
 using namespace Computing;
 
 long long ConcatInt(long long p0, long long p1)

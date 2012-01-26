@@ -6,17 +6,7 @@
 
 using namespace std;
 
-namespace Computing
-{
-    void PushDigits(set<char> & s, string str)
-    {
-        int length = str.size();
-        const char * c = str.c_str();
-
-        for(int idx = 0 ; idx < length ; ++idx)
-            s.insert(c[idx]);
-    }
-}
+#include "../Computing/DigitsOperations.hpp"
 
 int problem_32()
 {

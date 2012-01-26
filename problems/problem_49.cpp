@@ -8,6 +8,9 @@ using namespace std;
 
 #include <vector>
 
+#include "../Computing/IntegerOperations.hpp"
+#include "../Computing/DigitsOperations.hpp"
+
 using namespace Computing;
 
 int problem_49()

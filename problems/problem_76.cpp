@@ -5,6 +5,8 @@
 
 #include "problem_31.hpp"
 
+#include "../Computing/Combination.hpp"
+
 using namespace std;
 
 int problem_76()

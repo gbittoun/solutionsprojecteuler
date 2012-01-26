@@ -5,6 +5,9 @@
 #include "problem_51.hpp"
 #include "problem_37.hpp"
 
+#include "../Computing/IntegerOperations.hpp"
+#include "../Computing/DigitsOperations.hpp"
+
 using namespace std;
 using namespace Computing;
 

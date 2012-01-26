@@ -1,24 +1,11 @@
 #include "problem_26.hpp"
 
+#include "../Computing/IntegerOperations.hpp"
+
 #include <iostream>
 #include <set>
 
 using namespace std;
-
-namespace Computing
-{
-    bool ComparePair::operator()(const pair<int, int> & a, const pair<int, int> & b)
-    {
-        if(a.first < b.first)
-            return true;
-        else if(a.first > b.first)
-            return false;
-        else if(a.second < b.second)
-            return true;
-
-        return false;
-    }
-}
 
 int problem_26()
 {

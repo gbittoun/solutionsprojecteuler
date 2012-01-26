@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void recurse(const set<int> p, int a, int b, int & n)
+void recurse(const set<int> & p, int a, int b, int & n)
 {
     if(p.find(n*n+a*n+b) != p.end())
         recurse(p, a, b, ++n);

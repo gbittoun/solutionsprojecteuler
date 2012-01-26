@@ -4,6 +4,8 @@
 
 #include "problem_49.hpp"
 
+#include "../Computing/DigitsOperations.hpp"
+
 using namespace std;
 using namespace Computing;
 

@@ -2,33 +2,12 @@
 #include <iostream>
 #include <set>
 
-using namespace std;
-
 #include "problem_58.hpp"
 #include "problem_37.hpp"
 
-namespace Computing
-{
-    bool IsPrime(set<long long> & p, long long n)
-    {
-        if(p.find(n) != p.end())
-            return true;
+#include "../Computing/IntegerOperations.hpp"
 
-        set<long long>::iterator it = p.begin();
-        while(it != p.end())
-        {
-            if(n % *it == 0)
-                return false;
-            else if(*it > ceil(sqrt(n)))
-                return true;
-
-            ++it;
-        }
-
-        return true;
-    }
-}
-
+using namespace std;
 using namespace Computing;
 
 int problem_58()
