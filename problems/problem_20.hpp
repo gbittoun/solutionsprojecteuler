@@ -110,7 +110,7 @@ namespace Computing
             return ret;
         }
 
-        FatNumber<N> operator*(int x) const
+        FatNumber<N> operator*(const int & x) const
         {
             FatNumber<N> ret;
 
@@ -122,21 +122,6 @@ namespace Computing
             ret.Spread();
 
             return ret;
-        }
-
-        FatNumber<N> & operator<<(int x)
-        {
-            int tmp[N];
-
-            for(int idx = 0 ; idx < N ; ++idx)
-            {
-                if(idx < x)
-                    tmp[idx] = 0;
-                else
-                    tmp[idx] = v[idx-x];
-            }
-
-            memcpy(v, tmp, N*sizeof(int));
         }
 
         int NbDigits() const
@@ -219,9 +204,26 @@ namespace Computing
         for(int idx = (sizeof(x.v) / sizeof(int)) - 1 ; idx >= 0 ; --idx)
         {
             if (!youcanprint && x.v[idx] != 0)
+            {
                 youcanprint = true;
 
-            if(youcanprint)
+                int printable = x.v[idx];
+                if(printable >= 100)
+                {
+                    cout << printable / 100;printable = printable - (printable / 100) * 100;
+                    cout << printable / 10;printable = printable - (printable / 10) * 10;
+                    cout << printable;
+                }
+                else if(printable >= 10)
+                {
+                    cout << printable / 10;printable = printable - (printable / 10) * 10;
+                    cout << printable;
+                }
+                else
+                    cout << printable;
+
+            }
+            else if(youcanprint)
             {
                 int printable = x.v[idx];
                 cout << printable / 100;printable = printable - (printable / 100) * 100;
