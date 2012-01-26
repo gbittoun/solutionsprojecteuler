@@ -4,10 +4,10 @@ namespace Computing
 {
     using namespace std;
 
-    template<int DIGITS, int BASE>
+    template<int BASE>
     void DigitsDecompose(long long n, map<char, int> & digits)
     {
-        for(int idx = 0 ; idx < DIGITS ; ++idx)
+        while(n > 0)
         {
             ++digits[n % BASE];
             n /= BASE;

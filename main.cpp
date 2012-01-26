@@ -57,12 +57,13 @@
 using namespace std;
 using namespace Computing;
 
-map<long long, map<long long, FatNumber<32> > > pascal_triangle;
-
-FatNumber<32> Combination(long long n, long long p)
+template<int N>
+FatNumber<N> Combination(long long n, long long p)
 {
     if(n < p)
         return 0;
+
+    static map<long long, map<long long, FatNumber<N> > > pascal_triangle;
 
     if(pascal_triangle.size() == 0)
         pascal_triangle[0][0] = pascal_triangle[1][0] = pascal_triangle[1][1] = 1;
@@ -88,5 +89,30 @@ FatNumber<32> Combination(long long n, long long p)
 
 int main()
 {
+//    FatNumber<32> a = 1;
+//
+//    for(int idx = 0 ; idx < 8 ; ++idx)
+//    {
+//        a *= Combination<32>(54-(7+2*idx), 2);
+//        cout << idx+1 << " : " << a << endl;
+//    }
+
+    map<map<char,int>, set<long long>, DigitsComparer> buffer;
+
+    for(long long idx = 1 ; idx < 1000000000LL ; ++idx)
+    {
+        map<char, int> digits;
+        DigitsDecompose<10>(idx*idx*idx, digits);
+        buffer[digits].insert(idx*idx*idx);
+        if(buffer[digits].size() >= 5)
+        {
+            cout << buffer.size() << endl << endl;
+            for(set<long long>::iterator it = buffer[digits].begin() ; it != buffer[digits].end() ; ++it)
+                cout << *it << endl;
+
+            break;
+        }
+    }
+
     return 0;
 }

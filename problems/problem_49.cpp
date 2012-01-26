@@ -23,7 +23,7 @@ int problem_49()
             break;
 
         map<char, int> dc;
-        DigitsDecompose<4,10>(*it, dc);
+        DigitsDecompose<10>(*it, dc);
         numbers[dc].insert(*it);
     }
 

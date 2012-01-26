@@ -20,7 +20,7 @@ int problem_52()
         {
             long long r = idx * factor;
             map<char, int> digits;
-            DigitsDecompose<10, 10>(r, digits);
+            DigitsDecompose<10>(r, digits);
 
             nbIdentity[digits].push_back(r);
         }
