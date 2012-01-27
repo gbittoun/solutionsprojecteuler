@@ -3,21 +3,10 @@
 #include <iostream>
 #include <set>
 
+#include "../Computing/DigitsOperations.hpp"
+
 using namespace std;
-
-long long NbDigits(long long x)
-{
-    long long div = 10;
-    long long ret = 1;
-
-    while(div <= x)
-    {
-        div *= 10;
-        ++ret;
-    }
-
-    return ret;
-}
+using namespace Computing;
 
 long long CircShift(long long x, long long digits)
 {

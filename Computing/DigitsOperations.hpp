@@ -81,6 +81,8 @@ namespace Computing
     {
         bool operator()(const map<int, int> & x, const map<int, int> & y);
     };
+
+    long long NbDigits(long long x);
 }
 
 #endif

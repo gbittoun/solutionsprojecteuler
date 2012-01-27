@@ -142,12 +142,12 @@ namespace Computing
 
             if(ret != -1)
             {
-                if(v[ret] / 100)
-                    return ret*4 + 3;
-                else if(v[ret] / 10)
-                    return ret*4 + 2;
+                if(v[ret] >= 100)
+                    return ret*3 + 3;
+                else if(v[ret] >= 10)
+                    return ret*3 + 2;
                 else
-                    return ret * 4 + 1;
+                    return ret*3 + 1;
             }
 
             return ret;
@@ -161,7 +161,7 @@ namespace Computing
             {
                 int val = v[idx];
 
-                for(int jdx = 0 ; jdx < 3 ; ++jdx)
+                while(val > 0)
                 {
                     sum += val % 10;
                     val /= 10;

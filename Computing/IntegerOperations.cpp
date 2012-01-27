@@ -125,5 +125,14 @@ namespace Computing
         }
         cout << endl;
     }
+
+    long long power(long long a, long long b)
+    {
+        long long res = 1;
+        for(long long idx = 0 ; idx < b ; ++idx)
+            res *= a;
+
+        return res;
+    }
 }
 

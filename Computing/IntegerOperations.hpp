@@ -43,6 +43,8 @@ namespace Computing
     {
         return n * ((N - 2) * n + (4 - N)) / 2;
     }
+
+    long long power(long long a, long long b);
 }
 
 #endif

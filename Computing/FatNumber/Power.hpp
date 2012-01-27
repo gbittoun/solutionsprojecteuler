@@ -8,11 +8,11 @@ namespace Computing
     template<int N>
     FatNumber<N> FatPower(int a, int b)
     {
-        FatNumber<N> f = a;
+        FatNumber<N> f = 1;
 
         for(int idx = 0 ; idx < b ; ++idx)
         {
-            f = f * a;
+            f *= a;
         }
 
         return f;
