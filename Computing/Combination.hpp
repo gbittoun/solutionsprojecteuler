@@ -40,7 +40,47 @@ namespace Computing
         return pascal_triangle[n][p];
     }
 
+    long long factorial(long long n);
     void Combine(set<int> & coins, set<int>::iterator it, int val, long long & count);
+
+    template<typename T, int N>
+    class ProbabilisticPyramid
+    {
+        T v[N];
+
+        public :
+
+        typedef struct{T a[N];} ProbabilisticSolution;
+
+        ProbabilisticPyramid(T v_in[N])
+        {
+            for(size_t idx = 0 ; idx < N ; ++idx)
+                v[idx] = v_in[idx];
+        }
+
+        ProbabilisticSolution GetCombination(long long num) const
+        {
+            ProbabilisticSolution ret;
+            T memv[N];
+            for(int idx = 0 ; idx < N ; ++idx)
+                memv[idx] = v[idx];
+
+            num = num % factorial(N);
+
+            for(int idx = N - 1 ; idx >= 0 ; --idx)
+            {
+                long long div = factorial(idx);
+                int outIdx = num / div;
+                num %= div;
+
+                ret.a[N - 1 - idx] = memv[outIdx];
+                for(int jdx = outIdx ; jdx < N - 1 ; ++jdx)
+                    memv[jdx] = memv[jdx + 1];
+            }
+
+            return ret;
+        }
+    };
 }
 
 #endif

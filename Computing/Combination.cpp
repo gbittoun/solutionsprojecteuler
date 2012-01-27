@@ -1,7 +1,15 @@
-#include "../Computing/Combination.hpp"
+#include "Combination.hpp"
 
 namespace Computing
 {
+    long long factorial(long long n)
+    {
+        if(n <= 1)
+            return 1;
+        else
+            return n * factorial(n-1);
+    }
+
     void Combine(set<int> & coins, set<int>::iterator it, int val, long long & count)
     {
         while(it != coins.end())

@@ -1,8 +1,9 @@
 #include <string.h>
-
 #include <iostream>
 
-long long factorial(long long n);
+#include "../Computing/Combination.hpp"
+
+using namespace Computing;
 
 template<int N>
 class NumberPyramid

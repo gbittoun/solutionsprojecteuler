@@ -2,14 +2,6 @@
 
 using namespace std;
 
-long long factorial(long long n)
-{
-    if(n <= 1)
-        return 1;
-    else
-        return n * factorial(n-1);
-}
-
 int problem_24()
 {
 #if 1

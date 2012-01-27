@@ -37,6 +37,12 @@ namespace Computing
 
     void Decompose(long long n, set<long long> & primes, map<long long, int> & pd);
     void DumpDecomposition(map<long long, int> & pd);
+
+    template<int N, typename T>
+    inline T PolygonalNumber(int n)
+    {
+        return n * ((N - 2) * n + (4 - N)) / 2;
+    }
 }
 
 #endif
