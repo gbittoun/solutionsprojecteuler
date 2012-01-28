@@ -12,22 +12,28 @@ int problem_63()
 {
     int sum = 0;
 
-    FatNumber<1024> a;
+    FatNumber<16> a;
     for(int idx = 1 ; idx < 10 ; ++idx)
     {
-        for(int jdx = 1 ; jdx < 23 ; ++jdx)
+        int jdx = 1;
+
+        while(true)
         {
-            a = FatPower<1024>(idx,jdx);
+            a = FatPower<16>(idx,jdx);
             int nb = a.NbDigits();
             if(nb == jdx)
             {
                 ++sum;
                 cout << a << endl;
             }
+            else
+                break;
+
+            ++jdx;
         }
     }
 
-    cout << sum << endl;
+    cout << endl << sum << endl;
 
     return 0;
 }
