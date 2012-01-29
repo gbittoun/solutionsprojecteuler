@@ -134,5 +134,36 @@ namespace Computing
 
         return res;
     }
+
+    void GetSqrtCoeff(long long n, vector<long long> & a)
+    {
+        float sr = sqrt(n);
+        if(floor(sr) == ceil(sr))
+        {
+            a.push_back(floor(sr));
+            return;
+        }
+
+        long long b = 0, c = 1, tmp = 0;
+        set<pair<long long, long long> > mem;
+
+        do
+        {
+            mem.insert(make_pair(b,c));
+
+            do
+            {
+                tmp += c;
+            }
+            while((b - tmp - c) * (b - tmp - c) < n);
+
+            a.push_back(tmp / c);
+
+            b = tmp - b;
+            c = (n - b * b) / c;
+            tmp = 0;
+
+        } while(mem.find(make_pair(b,c)) == mem.end());
+    }
 }
 

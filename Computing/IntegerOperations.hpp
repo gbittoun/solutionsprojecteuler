@@ -1,6 +1,7 @@
 #ifndef INTEGEROPERATIONS_HPP
 #define INTEGEROPERATIONS_HPP
 
+#include <vector>
 #include <set>
 #include <map>
 #include <utility>
@@ -45,6 +46,7 @@ namespace Computing
     }
 
     long long power(long long a, long long b);
+    void GetSqrtCoeff(long long n, vector<long long> & a);
 }
 
 #endif
