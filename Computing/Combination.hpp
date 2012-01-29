@@ -21,7 +21,7 @@ namespace Computing
         if(pascal_triangle.size() == 0)
             pascal_triangle[0][0] = pascal_triangle[1][0] = pascal_triangle[1][1] = 1;
 
-        map<long long, map<long long, FatNumber<32> > >::iterator it_n = pascal_triangle.find(n);
+        typename map<long long, map<long long, FatNumber<N> > >::iterator it_n = pascal_triangle.find(n);
         if(it_n == pascal_triangle.end())
         {
             long long n_min = pascal_triangle.rbegin()->first + 1;
