@@ -13,7 +13,7 @@ namespace Computing
     {
         public :
 
-        bool operator()(const pair<int, int> & a, const pair<int, int> & b);
+        bool operator()(const pair<long long, long long> & a, const pair<long long, long long> & b);
     };
 
     set<int> GetDivisors(int n);

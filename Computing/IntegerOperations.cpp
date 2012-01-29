@@ -5,7 +5,7 @@
 
 namespace Computing
 {
-    bool ComparePair::operator()(const pair<int, int> & a, const pair<int, int> & b)
+    bool ComparePair::operator()(const pair<long long, long long> & a, const pair<long long, long long> & b)
     {
         if(a.first < b.first)
             return true;
