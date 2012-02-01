@@ -6,6 +6,8 @@
 #include <map>
 #include <utility>
 
+#include "FatNumber/FatNumber.hpp"
+
 namespace Computing
 {
     using namespace std;
@@ -47,6 +49,40 @@ namespace Computing
 
     long long power(long long a, long long b);
     void GetSqrtCoeff(long long n, vector<long long> & a);
+
+    template<int N>
+    struct FatFraction
+    {
+        FatNumber<N> u, d;
+    };
+
+    template<int N>
+    FatFraction<N> DevelopSqrtCoeff(vector<long long> c, long long iterations)
+    {
+        long long first = c[0];
+        c.erase(c.begin());
+
+        FatFraction<N> ret;
+        ret.u = 0;
+        ret.d = 1;
+
+        FatNumber<N> tmp = 0;
+
+        for(long long n = 0 ; n < iterations ; ++n)
+        {
+            for(vector<long long>::reverse_iterator it = c.rbegin() ; it != c.rend() ; ++it)
+            {
+                tmp = ret.d * *it + ret.u;
+                ret.u = ret.d;
+                ret.d = tmp;
+            }
+        }
+
+        ret.u = ret.d * first + ret.u;
+
+        return ret;
+    }
+
 }
 
 #endif

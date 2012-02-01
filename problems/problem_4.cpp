@@ -25,7 +25,7 @@ int IsPalindrome(long long x, int base)
 
 int problem_4()
 {
-    int res_a,res_b,highest_palindrome = 0;
+    int res_a = 0,res_b = 0,highest_palindrome = 0;
 
     for(int a = 999, b = 999 ; (a > 100) || ( (a = 999) && (--b > 100) ) ; --a )
     {

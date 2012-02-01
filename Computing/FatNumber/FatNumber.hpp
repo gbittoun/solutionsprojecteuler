@@ -236,6 +236,9 @@ namespace Computing
             }
         }
 
+        if(!youcanprint)
+            cout << 0;
+
         return o;
     }
 }
