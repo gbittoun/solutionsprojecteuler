@@ -57,10 +57,17 @@ namespace Computing
     };
 
     template<int N>
-    FatFraction<N> DevelopSqrtCoeff(vector<long long> c, long long iterations)
+    FatFraction<N> DevelopSqrtCoeff(vector<long long> c, long long iterations, bool getPellsCoeff = false)
     {
-        long long first = c[0];
-        c.erase(c.begin());
+        long long first = 0;
+
+        if(getPellsCoeff)
+            c.pop_back();
+        else
+        {
+            first = c[0];
+            c.erase(c.begin());
+        }
 
         FatFraction<N> ret;
         ret.u = 0;
@@ -78,7 +85,14 @@ namespace Computing
             }
         }
 
-        ret.u = ret.d * first + ret.u;
+        if(getPellsCoeff)
+        {
+            tmp = ret.u;
+            ret.u = ret.d;
+            ret.d = tmp;
+        }
+        else
+            ret.u = ret.d * first + ret.u;
 
         return ret;
     }

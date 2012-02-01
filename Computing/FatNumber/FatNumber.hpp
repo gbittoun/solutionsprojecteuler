@@ -79,6 +79,20 @@ namespace Computing
             return ret;
         }
 
+        FatNumber<N> operator-(const FatNumber<N> & x) const
+        {
+            FatNumber<N> ret;
+
+            for(int idx = 0 ; idx < N ; ++idx)
+            {
+                ret.v[idx] = v[idx] - x.v[idx];
+            }
+
+            ret.Spread();
+
+            return ret;
+        }
+
         FatNumber<N> & operator+=(const FatNumber<N> & x)
         {
             for(int idx = 0 ; idx < N ; ++idx)
