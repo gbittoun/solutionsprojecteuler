@@ -1,14 +1,46 @@
-#include "problem_18.hpp"
+#include "problem_67.hpp"
 
 #include <iostream>
+#include <string>
+#include <fstream>
+#include <vector>
+
+#include <stdlib.h>
 
 using namespace std;
 
-int problem_18()
+int problem_67()
 {
-    int tab[] = {75,95,64,17,47,82,18,35,87,10,20,04,82,47,65,19,01,23,75,03,34,88,02,77,73,07,63,67,99,65,04,28,06,16,70,92,41,41,26,56,83,40,80,70,33,41,48,72,33,47,32,37,16,94,29,53,71,44,65,25,43,91,52,97,51,14,70,11,33,28,77,73,17,78,39,68,17,57,91,71,52,38,17,14,91,43,58,50,27,29,48,63,66,04,68,89,53,67,30,73,16,69,87,40,31,04,62,98,27,23,9,70,98,73,93,38,53,60,04,23};
+    fstream f("triangle.txt");
 
-    for(int level = 1 ; level < 15 ; ++level)
+    vector<int> values;
+
+    int maxlevel = 0;
+
+    while(!f.eof())
+    {
+        string str;
+        getline(f, str);
+
+        ++maxlevel;
+        while(true)
+        {
+            values.push_back(atoi(str.c_str()));
+
+            size_t pos = str.find(' ');
+            if(pos != string::npos)
+                str = str.substr(pos + 1);
+            else
+                break;
+
+            if(str.length() < 2)
+                break;
+        }
+    }
+
+    int * tab = &values[0];
+
+    for(int level = 1 ; level < maxlevel ; ++level)
     {
         int prevLinePos = (level-1)*(level)/2;
         int linePos = level*(level+1)/2;
@@ -32,9 +64,9 @@ int problem_18()
         }
     }
 
-    int level = 14;
+    int level = maxlevel - 1;
     int linePos = level*(level+1)/2;
-    int lineSize = level + 1;
+    int lineSize = maxlevel;
     int maxval = 0;
 
     for(int idx = 0 ; idx < lineSize ; ++idx)
