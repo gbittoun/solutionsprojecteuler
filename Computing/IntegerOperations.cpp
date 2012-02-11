@@ -165,5 +165,21 @@ namespace Computing
 
         } while(mem.find(make_pair(b,c)) == mem.end());
     }
+
+    long long totient(long long n, set<long long> & primes)
+    {
+        map<long long, int> pd;
+        Decompose(n, primes, pd);
+
+        long long t = n;
+
+        for(map<long long, int>::iterator it = pd.begin() ; it != pd.end() ; ++it)
+        {
+            t /= it->first;
+            t *= it->first - 1;
+        }
+
+        return t;
+    }
 }
 
