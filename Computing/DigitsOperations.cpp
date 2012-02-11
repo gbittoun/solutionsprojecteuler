@@ -100,7 +100,7 @@ namespace Computing
 
     long long NbDigits(long long x)
     {
-        long long ret = 1;
+        long long ret = 0;
 
         while(x > 0)
         {

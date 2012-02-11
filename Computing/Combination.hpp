@@ -80,6 +80,11 @@ namespace Computing
 
             return ret;
         }
+
+        long long GetNbCombinations()
+        {
+            return factorial(N);
+        }
     };
 }
 
