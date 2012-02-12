@@ -15,7 +15,7 @@ int problem_70()
 
     for(long long n = 10000000LL ; n > 5000000LL ; --n)
     {
-        long long t = totient(n, primes);
+        long long t = Totient(n, primes);
 
         map<char, int> d0, d1;
         DigitsDecompose<10>(n, d0);

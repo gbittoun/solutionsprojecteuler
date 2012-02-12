@@ -1,9 +1,11 @@
 #include "problem_33.hpp"
-#include "problem_15.hpp"
+
+#include "../Computing/IntegerOperations.hpp"
 
 #include <iostream>
 
 using namespace std;
+using namespace Computing;
 
 int problem_33()
 {
@@ -20,8 +22,8 @@ int problem_33()
 
         if(u > 0 && d > 0)
         {
-            int div0 = pgcd(idx, jdx);
-            int div1 = pgcd(u, d);
+            int div0 = Hcf(idx, jdx);
+            int div1 = Hcf(u, d);
 
             if( (idx - (idx / 10) * 10 == jdx / 10) &&
                (idx < jdx) &&
@@ -37,7 +39,7 @@ int problem_33()
     }
 
     cout << endl << finalUp << " / " << finalDown << endl;
-    cout << finalUp / pgcd(finalUp, finalDown) << " / " << finalDown / pgcd(finalUp, finalDown) << endl;
+    cout << finalUp / Hcf(finalUp, finalDown) << " / " << finalDown / Hcf(finalUp, finalDown) << endl;
 
     return 0;
 }

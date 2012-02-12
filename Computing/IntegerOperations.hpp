@@ -97,7 +97,8 @@ namespace Computing
         return ret;
     }
 
-    long long totient(long long n, set<long long> & primes);
+    long long Hcf(long long a, long long b);
+    long long Totient(long long n, set<long long> & primes);
 }
 
 #endif

@@ -166,7 +166,31 @@ namespace Computing
         } while(mem.find(make_pair(b,c)) == mem.end());
     }
 
-    long long totient(long long n, set<long long> & primes)
+    long long Hcf(long long a, long long b)
+    {
+        if(a == b)
+            return a;
+        else if(a > b)
+        {
+            long long tmp = a % b;
+
+            if(tmp == 0)
+                return b;
+            else
+                return Hcf(tmp, b);
+        }
+        else
+        {
+            long long tmp = b % a;
+
+            if(tmp == 0)
+                return a;
+            else
+                return Hcf(tmp, a);
+        }
+    }
+
+    long long Totient(long long n, set<long long> & primes)
     {
         map<long long, int> pd;
         Decompose(n, primes, pd);
