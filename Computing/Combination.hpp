@@ -40,7 +40,7 @@ namespace Computing
         return pascal_triangle[n][p];
     }
 
-    long long factorial(long long n);
+    long long Factorial(long long n);
     void Combine(set<int> & coins, set<int>::iterator it, int val, long long & count);
 
     template<typename T, int N>
@@ -65,11 +65,11 @@ namespace Computing
             for(int idx = 0 ; idx < N ; ++idx)
                 memv[idx] = v[idx];
 
-            num = num % factorial(N);
+            num = num % Factorial(N);
 
             for(int idx = N - 1 ; idx >= 0 ; --idx)
             {
-                long long div = factorial(idx);
+                long long div = Factorial(idx);
                 int outIdx = num / div;
                 num %= div;
 
@@ -83,7 +83,7 @@ namespace Computing
 
         long long GetNbCombinations()
         {
-            return factorial(N);
+            return Factorial(N);
         }
     };
 }

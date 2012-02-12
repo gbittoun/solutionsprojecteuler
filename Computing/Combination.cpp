@@ -2,12 +2,12 @@
 
 namespace Computing
 {
-    long long factorial(long long n)
+    long long Factorial(long long n)
     {
         if(n <= 1)
             return 1;
         else
-            return n * factorial(n-1);
+            return n * Factorial(n-1);
     }
 
     void Combine(set<int> & coins, set<int>::iterator it, int val, long long & count)

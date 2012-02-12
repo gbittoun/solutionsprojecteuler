@@ -26,11 +26,11 @@ class NumberPyramid
         int memv[N];
         memcpy(memv, v, N * sizeof(int));
 
-        num = num % factorial(N);
+        num = num % Factorial(N);
 
         for(int idx = N - 1 ; idx >= 0 ; --idx)
         {
-            long long div = factorial(idx);
+            long long div = Factorial(idx);
             int outIdx = num / div;
             num %= div;
 

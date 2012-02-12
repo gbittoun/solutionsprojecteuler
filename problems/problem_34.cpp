@@ -16,7 +16,7 @@ long long GetFactorialSum(long long x)
         div *= 10;
         long long tmp = x - (x / div) * div;
         tmp = (tmp - (tmp % (div / 10))) / (div / 10);
-        sum += factorial(tmp);
+        sum += Factorial(tmp);
     }
     while(div < x);
 

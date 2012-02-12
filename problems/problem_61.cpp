@@ -81,7 +81,7 @@ int problem_61()
 
     ProbabilisticPyramid<set<int>, 6> p(s);
 
-    for(long long idx = 0 ; idx < factorial(6) ; ++idx)
+    for(long long idx = 0 ; idx < Factorial(6) ; ++idx)
     {
         ProbabilisticPyramid<set<int>, 6>::ProbabilisticSolution solution = p.GetCombination(idx);
         TestPolygonalSolution(solution.a[0], solution.a[1], solution.a[2], solution.a[3], solution.a[4], solution.a[5]);
