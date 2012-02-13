@@ -41,6 +41,7 @@
 		<Unit filename="Computing/FatNumber/Power.hpp" />
 		<Unit filename="Computing/IntegerOperations.cpp" />
 		<Unit filename="Computing/IntegerOperations.hpp" />
+		<Unit filename="Computing/Matrix.hpp" />
 		<Unit filename="Computing/StringOperations.cpp" />
 		<Unit filename="Computing/StringOperations.hpp" />
 		<Unit filename="PokerGame/Card.cpp" />
@@ -183,6 +184,8 @@
 		<Unit filename="problems/problem_73.hpp" />
 		<Unit filename="problems/problem_74.cpp" />
 		<Unit filename="problems/problem_74.hpp" />
+		<Unit filename="problems/problem_75.cpp" />
+		<Unit filename="problems/problem_75.hpp" />
 		<Unit filename="problems/problem_76.cpp" />
 		<Unit filename="problems/problem_76.hpp" />
 		<Unit filename="problems/problem_8.cpp" />
