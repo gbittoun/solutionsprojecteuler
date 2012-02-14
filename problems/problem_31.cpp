@@ -9,7 +9,7 @@ using namespace std;
 
 int problem_31()
 {
-    set<int> coins;
+    set<long long> coins;
     coins.insert(1);
     coins.insert(2);
     coins.insert(5);

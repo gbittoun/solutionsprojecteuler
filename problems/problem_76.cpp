@@ -11,7 +11,7 @@ using namespace std;
 
 int problem_76()
 {
-    set<int> numbers;
+    set<long long> numbers;
     for(int idx = 1 ; idx < 100 ; ++idx)
         numbers.insert(idx);
 

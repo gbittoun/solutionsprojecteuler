@@ -41,7 +41,7 @@ namespace Computing
     }
 
     long long Factorial(long long n);
-    void Combine(set<int> & coins, set<int>::iterator it, int val, long long & count);
+    void Combine(set<long long> & coins, set<long long>::iterator it, long long val, long long & count);
 
     template<typename T, int N>
     class ProbabilisticPyramid
