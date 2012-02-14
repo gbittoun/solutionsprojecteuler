@@ -67,12 +67,7 @@ namespace Computing
 
             if(isPrime)
                 primes.insert(idx);
-
-            if(idx % 100000 == 0)
-                cout << idx << endl;
         }
-
-        cout << "Primes computing finished !" << endl << endl;
     }
 
     bool IsPrime(set<long long> & p, long long n)
