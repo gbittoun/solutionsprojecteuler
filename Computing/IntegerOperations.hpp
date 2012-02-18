@@ -42,7 +42,7 @@ namespace Computing
     void DumpDecomposition(map<long long, int> & pd);
 
     template<int N, typename T>
-    inline T PolygonalNumber(int n)
+    inline T PolygonalNumber(long long n)
     {
         return n * ((N - 2) * n + (4 - N)) / 2;
     }
