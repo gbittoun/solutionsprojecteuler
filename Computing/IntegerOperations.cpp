@@ -200,5 +200,34 @@ namespace Computing
 
         return t;
     }
+
+    long long Partition_Truncated(long long n)
+    {
+        static map<long long, long long> p;
+        if(p.size() == 0)
+            p[0] = 1;
+
+        map<long long, long long>::iterator it = p.find(n);
+        if(it != p.end())
+            return it->second;
+
+        long long res = 0;
+
+        for(long long k = 1 ; ; ++k)
+        {
+            long long idx0 =  n - PolygonalNumber<5, long long>( k);
+            long long idx1 =  n - PolygonalNumber<5, long long>(-k);
+
+            if(idx0 >= 0)
+                res -= ((k % 2 ? -1 : 1) * Partition_Truncated(idx0));
+            if(idx1 >= 0)
+                res -= ((k % 2 ? -1 : 1) * Partition_Truncated(idx1));
+
+            if(idx0 < 0 && idx1 < 0)
+                break;
+        }
+
+        return (p[n] = (res % 1000000LL));
+    }
 }
 
