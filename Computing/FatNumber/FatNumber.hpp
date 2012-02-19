@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <string.h>
+#include <stack>
 
 namespace Computing
 {
@@ -127,7 +128,7 @@ namespace Computing
             return ret;
         }
 
-        FatNumber<N> operator*(const int & x) const
+        FatNumber<N> operator*(const long long & x) const
         {
             FatNumber<N> ret;
 
@@ -139,6 +140,39 @@ namespace Computing
             ret.Spread();
 
             return ret;
+        }
+
+        FatNumber<N> operator/(const FatNumber<N> & x) const
+        {
+            if(*this < x)
+                return 0;
+            else if(*this == x)
+                return 1;
+
+            FatNumber<N> n_inf = 1, n_sup = 2;
+            stack<FatNumber<N> > s;
+
+            while(n_sup * x < *this)
+            {
+                s.push(n_inf);
+                n_inf = n_sup;
+                n_sup *= 2;
+            }
+            cout << "this = " << *this << " , x = " << x << " , n_inf = " << n_inf << endl;
+            while(!(n_inf * x == *this))
+            {
+                FatNumber<N> tmp = s.top();s.pop();
+                cout << tmp << " , " << n_inf << endl;
+                tmp = tmp + n_inf;
+
+                if(tmp * x <= *this)
+                {
+                    n_inf = tmp;
+                    cout << "n_inf = " << n_inf << endl;
+                }
+            }
+
+            return n_inf;
         }
 
         int NbDigits() const
@@ -196,6 +230,19 @@ namespace Computing
             }
 
             return false;
+        }
+
+        bool operator<=(const FatNumber<N> & number) const
+        {
+            for(int idx = (sizeof(v) / sizeof(int)) - 1 ; idx >= 0 ; --idx)
+            {
+                if(v[idx] < number.v[idx])
+                    return true;
+                else if (v[idx] > number.v[idx])
+                    return false;
+            }
+
+            return true;
         }
 
         class CompareFatNumber
