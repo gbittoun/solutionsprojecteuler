@@ -113,7 +113,26 @@ namespace Computing
         {
             FatNumber<N> ret;
 
-            AddBuffers(v, x.v, ret.v);
+            if(this->isNegative == x.isNegative)
+            {
+                AddBuffers(this->v, x.v, ret.v);
+                ret.isNegative = this->isNegative;
+            }
+            else
+            {
+                int comp = CompareBuffers(v, x.v);
+
+                if(comp >= 0)
+                {
+                    SubstractBuffers(v, x.v, ret.v);
+                    ret.isNegative = this->isNegative;
+                }
+                else
+                {
+                    SubstractBuffers(x.v, v, ret.v);
+                    ret.isNegative = x.isNegative;
+                }
+            }
 
             ret.Spread();
 
@@ -141,7 +160,7 @@ namespace Computing
                 else
                 {
                     SubstractBuffers(x.v, v, ret.v);
-                    ret.isNegative = x.isNegative;
+                    ret.isNegative = !x.isNegative;
                 }
             }
 
@@ -318,6 +337,9 @@ namespace Computing
     template<int N>
     ostream & operator<<(ostream & o, const FatNumber<N> & x)
     {
+        if(x.isNegative)
+            cout << "-";
+
         bool youcanprint = false;
         for(int idx = (sizeof(x.v) / sizeof(int)) - 1 ; idx >= 0 ; --idx)
         {
