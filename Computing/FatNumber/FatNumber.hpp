@@ -14,6 +14,7 @@ namespace Computing
     class FatNumber
     {
         int v[N];
+        bool isNegative;
 
         void Spread()
         {
@@ -27,24 +28,62 @@ namespace Computing
             }
         }
 
+        static inline void AddBuffers(const int v0[N], const int v1[N], int v_out[N])
+        {
+            for(int idx = 0 ; idx < N ; ++idx)
+            {
+                v_out[idx] = v0[idx] + v1[idx];
+            }
+        }
+
+        static inline void SubstractBuffers(const int v0[N], const int v1[N], int v_out[N])
+        {
+            for(int idx = 0 ; idx < N ; ++idx)
+            {
+                v_out[idx] = v0[idx] - v1[idx];
+                while(v_out[idx] < 0)
+                {
+                    v_out[idx] += 1000;
+                    --v_out[idx+1];
+                }
+            }
+        }
+
+        static inline int CompareBuffers(const int v0[N], const int v1[N])
+        {
+            for(int idx = (sizeof(v) / sizeof(int)) - 1 ; idx >= 0 ; --idx)
+            {
+                if(v0[idx] < v1[idx])
+                    return -1;
+                else if (v0[idx] > v1[idx])
+                    return 1;
+            }
+
+            return 0;
+        }
+
         public:
 
         FatNumber()
         {
             memset(v, 0, N * sizeof(int));
+            isNegative = false;
         }
 
         FatNumber(int a)
         {
             memset(v, 0, N * sizeof(int));
             v[0] = a;
+            isNegative = false;
             Spread();
         }
 
-        FatNumber<N> & operator=(int x)
+        FatNumber<N> & operator=(long long x)
         {
             memset(v, 0, N * sizeof(int));
             v[0] = x;
+            isNegative = (x < 0);
+
             Spread();
 
             return *this;
@@ -53,12 +92,16 @@ namespace Computing
         FatNumber<N> & operator=(const FatNumber<N> x)
         {
             memcpy(v, x.v, sizeof(v));
+            isNegative = x.isNegative;
 
             return *this;
         }
 
         bool operator==(const FatNumber<N> & x) const
         {
+            if(x.isNegative != this->isNegative)
+                return false;
+
             for(int idx = 0 ; idx < N ; ++idx)
                 if(v[idx] != x.v[idx])
                     return false;
@@ -70,10 +113,7 @@ namespace Computing
         {
             FatNumber<N> ret;
 
-            for(int idx = 0 ; idx < N ; ++idx)
-            {
-                ret.v[idx] = v[idx] + x.v[idx];
-            }
+            AddBuffers(v, x.v, ret.v);
 
             ret.Spread();
 
@@ -84,9 +124,25 @@ namespace Computing
         {
             FatNumber<N> ret;
 
-            for(int idx = 0 ; idx < N ; ++idx)
+            if(this->isNegative != x.isNegative)
             {
-                ret.v[idx] = v[idx] - x.v[idx];
+                AddBuffers(this->v, x.v, ret.v);
+                ret.isNegative = this->isNegative;
+            }
+            else
+            {
+                int comp = CompareBuffers(v, x.v);
+
+                if(comp >= 0)
+                {
+                    SubstractBuffers(v, x.v, ret.v);
+                    ret.isNegative = this->isNegative;
+                }
+                else
+                {
+                    SubstractBuffers(x.v, v, ret.v);
+                    ret.isNegative = x.isNegative;
+                }
             }
 
             ret.Spread();
@@ -219,15 +275,12 @@ namespace Computing
             return sum;
         }
 
-        bool operator<(const FatNumber<N> & number) const
+        bool operator<(const FatNumber<N> & x) const
         {
-            for(int idx = (sizeof(v) / sizeof(int)) - 1 ; idx >= 0 ; --idx)
-            {
-                if(v[idx] < number.v[idx])
-                    return true;
-                else if (v[idx] > number.v[idx])
-                    return false;
-            }
+            int comp = CompareBuffers(this->v, x.v);
+
+            if(comp < 0)
+                return true;
 
             return false;
         }

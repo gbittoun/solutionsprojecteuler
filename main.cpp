@@ -30,15 +30,11 @@ T GetIntegerSqrt(T a)
 
 int main()
 {
-//    FatNumber<256> a = 2;
-//    for(int p = 0 ; p < 100 ; ++p)
-//        a *= 10;
-//
-//    cout << GetIntegerSqrt(a) << endl;
+    FatNumber<256> a = 2;
+    for(int p = 0 ; p < 100 ; ++p)
+        a *= 10;
 
-    FatNumber<128> a = 10, b = 2;
-
-    cout << a/b << endl;
+    cout << GetIntegerSqrt(a) << endl;
 
     return 0;
 }
