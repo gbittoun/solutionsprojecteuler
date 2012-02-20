@@ -38,13 +38,17 @@ namespace Computing
 
         static inline void SubstractBuffers(const int v0[N], const int v1[N], int v_out[N])
         {
+            int retenue = 0;
+
             for(int idx = 0 ; idx < N ; ++idx)
             {
-                v_out[idx] = v0[idx] - v1[idx];
+                v_out[idx] = v0[idx] - v1[idx] + (retenue ? retenue++ : 0);
                 while(v_out[idx] < 0)
                 {
+                    cout << "pouet" << endl;
+
                     v_out[idx] += 1000;
-                    --v_out[idx+1];
+                    --retenue;
                 }
             }
         }
@@ -171,9 +175,25 @@ namespace Computing
 
         FatNumber<N> & operator+=(const FatNumber<N> & x)
         {
-            for(int idx = 0 ; idx < N ; ++idx)
+            if(this->isNegative == x.isNegative)
             {
-                v[idx] += x.v[idx];
+                AddBuffers(v, x.v, v);
+                isNegative = this->isNegative;
+            }
+            else
+            {
+                int comp = CompareBuffers(v, x.v);
+
+                if(comp >= 0)
+                {
+                    SubstractBuffers(v, x.v, v);
+                    isNegative = this->isNegative;
+                }
+                else
+                {
+                    SubstractBuffers(x.v, v, v);
+                    isNegative = x.isNegative;
+                }
             }
 
             Spread();
@@ -184,6 +204,9 @@ namespace Computing
         FatNumber<N> & operator*=(const FatNumber<N> & x)
         {
             *this = *this * x;
+
+            isNegative = (isNegative != x.isNegative);
+
             return *this;
         }
 
@@ -200,6 +223,8 @@ namespace Computing
                 ret.Spread();
             }
 
+            ret.isNegative = (isNegative != x.isNegative);
+
             return ret;
         }
 
@@ -213,6 +238,11 @@ namespace Computing
             }
 
             ret.Spread();
+
+            if(x == 0)
+                ret.isNegative = false;
+            else
+                ret.isNegative = (isNegative != (x < 0));
 
             return ret;
         }
@@ -233,19 +263,19 @@ namespace Computing
                 n_inf = n_sup;
                 n_sup *= 2;
             }
-            cout << "this = " << *this << " , x = " << x << " , n_inf = " << n_inf << endl;
+
             while(!(n_inf * x == *this))
             {
                 FatNumber<N> tmp = s.top();s.pop();
-                cout << tmp << " , " << n_inf << endl;
                 tmp = tmp + n_inf;
 
                 if(tmp * x <= *this)
                 {
                     n_inf = tmp;
-                    cout << "n_inf = " << n_inf << endl;
                 }
             }
+
+            n_inf.isNegative = (isNegative != n_inf.isNegative);
 
             return n_inf;
         }
