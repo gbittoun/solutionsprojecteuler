@@ -45,8 +45,6 @@ namespace Computing
                 v_out[idx] = v0[idx] - v1[idx] + (retenue ? retenue++ : 0);
                 while(v_out[idx] < 0)
                 {
-                    cout << "pouet" << endl;
-
                     v_out[idx] += 1000;
                     --retenue;
                 }
@@ -249,27 +247,33 @@ namespace Computing
 
         FatNumber<N> operator/(const FatNumber<N> & x) const
         {
-            if(*this < x)
+            int comp = CompareBuffers(v, x.v);
+            if(comp < 0)
                 return 0;
-            else if(*this == x)
-                return 1;
+            else if(comp == 0)
+            {
+                if(isNegative != x.isNegative)
+                    return -1;
+                else
+                    return 1;
+            }
 
             FatNumber<N> n_inf = 1, n_sup = 2;
             stack<FatNumber<N> > s;
 
-            while(n_sup * x < *this)
+            while(CompareBuffers((n_sup * x).v, v) < 0)
             {
                 s.push(n_inf);
                 n_inf = n_sup;
                 n_sup *= 2;
             }
 
-            while(!(n_inf * x == *this))
+            while(s.size() > 0)
             {
                 FatNumber<N> tmp = s.top();s.pop();
                 tmp = tmp + n_inf;
 
-                if(tmp * x <= *this)
+                if(CompareBuffers((tmp * x).v, v) <= 0)
                 {
                     n_inf = tmp;
                 }
@@ -278,6 +282,28 @@ namespace Computing
             n_inf.isNegative = (isNegative != n_inf.isNegative);
 
             return n_inf;
+        }
+
+        bool operator<(const FatNumber<N> & x) const
+        {
+            if(isNegative && x.isNegative)
+                return true;
+            else if(!isNegative && x.isNegative)
+                return false;
+
+            int comp = CompareBuffers(this->v, x.v);
+
+            if(!isNegative && comp < 0)
+                return true;
+            else if(isNegative && comp > 0)
+                return true;
+
+            return false;
+        }
+
+        bool operator<=(const FatNumber<N> & number) const
+        {
+            return (*this < number || *this == number);
         }
 
         int NbDigits() const
@@ -322,29 +348,6 @@ namespace Computing
             }
 
             return sum;
-        }
-
-        bool operator<(const FatNumber<N> & x) const
-        {
-            int comp = CompareBuffers(this->v, x.v);
-
-            if(comp < 0)
-                return true;
-
-            return false;
-        }
-
-        bool operator<=(const FatNumber<N> & number) const
-        {
-            for(int idx = (sizeof(v) / sizeof(int)) - 1 ; idx >= 0 ; --idx)
-            {
-                if(v[idx] < number.v[idx])
-                    return true;
-                else if (v[idx] > number.v[idx])
-                    return false;
-            }
-
-            return true;
         }
 
         class CompareFatNumber
