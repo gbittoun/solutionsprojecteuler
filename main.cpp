@@ -32,11 +32,13 @@ T GetIntegerSqrt(T a)
 
 int main()
 {
-    FatNumber<200> a = 2;
+    FatNumber<256> a = 99;
     for(int i = 0 ; i < 200 ; ++i)
         a *= 10;
 
-    cout << GetIntegerSqrt(a) << endl;
+    FatNumber<256> b = GetIntegerSqrt(a);
+    cout << b << endl;
+    cout << b.NbDigits() << endl;
 
     return 0;
 }
