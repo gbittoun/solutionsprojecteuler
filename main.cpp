@@ -1,6 +1,7 @@
 #include "Computing/IntegerOperations.hpp"
 
 #include <iostream>
+#include <math.h>
 
 using namespace std;
 using namespace Computing;
@@ -18,8 +19,6 @@ T GetIntegerSqrt(T a)
         T x_tmp   = (x * x + a) / (x * 2);
         T nrj_tmp = x_tmp * x_tmp - a;
 
-        cout << x_tmp << endl;
-
         if(nrj < nrj_tmp && --joker == 0)
             break;
 
@@ -30,15 +29,34 @@ T GetIntegerSqrt(T a)
     return x;
 }
 
+#include "problems/problem_25.hpp"
+
 int main()
 {
-    FatNumber<256> a = 99;
-    for(int i = 0 ; i < 200 ; ++i)
-        a *= 10;
+    int sum = 0;
 
-    FatNumber<256> b = GetIntegerSqrt(a);
-    cout << b << endl;
-    cout << b.NbDigits() << endl;
+    for(int n = 2 ; n < 100 ; ++n)
+    {
+        if(ceil(sqrt(n)) != floor(sqrt(n)))
+        {
+            FatNumber<256> a = n;
+            for(int i = 0 ; i < 220 ; ++i)
+                a *= 10;
+
+            FatNumber<256> b = GetIntegerSqrt(a);
+
+            FatNumber<256>::DigitIterator it = b.GetIterator();
+            //it.Next();
+
+            for(int count = 0 ; count < 100 ; ++count)
+            {
+                sum += it.GetCurrent();
+                it.Next();
+            }
+        }
+
+        cout << n << " : " << sum << endl;
+    }
 
     return 0;
 }

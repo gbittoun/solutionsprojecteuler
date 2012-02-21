@@ -350,6 +350,57 @@ namespace Computing
             return sum;
         }
 
+        class DigitIterator
+        {
+            int v[N], n, c;
+
+            public :
+
+            DigitIterator(int * _v, int _n, int _c) :
+                n(_n),
+                c(_c)
+            {
+                memcpy(v, _v, sizeof(v));
+            }
+
+            void Next()
+            {
+                c /= 10;
+                if(c == 0) --n, c = 100;
+
+                if(n < 0)
+                    n = -1, c = -1;
+            }
+
+            int GetCurrent()
+            {
+                if(n >= 0)
+                    return (v[n] / c) % 10;
+                else
+                    return 0;
+            }
+
+            bool End()
+            {
+                return (n == -1);
+            }
+        };
+
+        DigitIterator GetIterator()
+        {
+            int n = N - 1;
+            while(v[n] == 0)
+                --n;
+
+            int c = 1;
+            if(v[n] > 100)
+                c = 100;
+            else if(v[n] > 10)
+                c = 10;
+
+            return DigitIterator(v, n, c);
+        }
+
         class CompareFatNumber
         {
             public :
