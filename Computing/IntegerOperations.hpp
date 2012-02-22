@@ -101,6 +101,29 @@ namespace Computing
     long long Totient(long long n, set<long long> & primes);
 
     long long Partition_Truncated(long long n);
+
+    template<typename T>
+    T GetIntegerSqrt(T a)
+    {
+        T x = a;
+        T nrj = x * x - a;
+
+        int joker = 10;
+
+        while(true)
+        {
+            T x_tmp   = (x * x + a) / (x * 2);
+            T nrj_tmp = x_tmp * x_tmp - a;
+
+            if(nrj < nrj_tmp && --joker == 0)
+                break;
+
+            x = x_tmp;
+            nrj = nrj_tmp;
+        }
+
+        return x;
+    }
 }
 
 #endif
