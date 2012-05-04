@@ -1,10 +1,13 @@
 #include "Problem_81.hpp"
 
+#include <iostream>
 #include <fstream>
 
 using namespace std;
 
-void FillMatrix(long long matrix[80][80], const string & str)
+#define MATRIX_SIZE 80
+
+void FillMatrix(long long matrix[MATRIX_SIZE][MATRIX_SIZE], const string & str)
 {
     const char * raw = str.c_str();
     const int length = str.size();
@@ -22,7 +25,7 @@ void FillMatrix(long long matrix[80][80], const string & str)
             current = 0;
 
             col += 1;
-            if(col >= 80)
+            if(col >= MATRIX_SIZE)
             {
                 col = 0;
                 row += 1;
@@ -39,9 +42,39 @@ int Problem_81()
 
     f.close();
 
-    long long mat[80][80];
+    long long mat[MATRIX_SIZE][MATRIX_SIZE];
 
     FillMatrix(mat, str);
+
+    for(int i = 1 ; i < MATRIX_SIZE ; ++i)
+    {
+        for(int j = 0 ; j <= i ; ++j)
+        {
+            if(j == 0)
+                mat[i - j][j] += mat[i - j - 1][j];
+            else if(j == i)
+                mat[i - j][j] += mat[i - j][j - 1];
+            else
+                mat[i - j][j] += (mat[i - j - 1][j] < mat[i - j][j - 1]) ? mat[i - j - 1][j] : mat[i - j][j - 1];
+        }
+    }
+
+    for(int i = MATRIX_SIZE - 2 ; i >= 0 ; --i)
+    {
+        for(int j = MATRIX_SIZE - 1 ; j >= MATRIX_SIZE - i ; --j)
+        {
+            cout << i << j << endl;
+        }
+    }
+
+    long long min = 0x7fffffffffffffffLL;
+
+    for(int i = 0 ; i < MATRIX_SIZE ; ++i)
+    {
+        min = (min < mat[i][i]) ? min : mat[i][i];
+    }
+
+    cout << min << endl;
 
     return 0;
 }
