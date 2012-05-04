@@ -61,9 +61,9 @@ int Problem_81()
 
     for(int i = MATRIX_SIZE - 2 ; i >= 0 ; --i)
     {
-        for(int j = MATRIX_SIZE - 1 ; j >= MATRIX_SIZE - i ; --j)
+        for(int j = MATRIX_SIZE - 1 ; j >= i ; --j)
         {
-            cout << i << j << endl;
+            cout << i << " " << j << endl;
         }
     }
 
