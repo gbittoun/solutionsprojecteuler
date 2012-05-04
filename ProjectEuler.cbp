@@ -54,6 +54,8 @@
 		<Unit filename="PokerGame\Parser\HandParser.hpp" />
 		<Unit filename="PokerGame\PokerConfig.hpp" />
 		<Unit filename="main.cpp" />
+		<Unit filename="problems\Problem_81.cpp" />
+		<Unit filename="problems\Problem_81.hpp" />
 		<Unit filename="problems\problem_10.cpp" />
 		<Unit filename="problems\problem_10.hpp" />
 		<Unit filename="problems\problem_11.cpp" />

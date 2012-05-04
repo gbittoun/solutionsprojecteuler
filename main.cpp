@@ -1,6 +1,6 @@
-#include "problems/problem_80.hpp"
+#include "problems/problem_81.hpp"
 
 int main()
 {
-    return problem_80();
+    return Problem_81();
 }
