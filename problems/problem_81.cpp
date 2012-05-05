@@ -1,4 +1,4 @@
-#include "Problem_81.hpp"
+#include "problem_81.hpp"
 
 #include <iostream>
 #include <fstream>
@@ -34,7 +34,7 @@ void FillMatrix(long long matrix[MATRIX_SIZE][MATRIX_SIZE], const string & str)
     }
 }
 
-int Problem_81()
+int problem_81()
 {
     ifstream f("matrix.txt");
     string str((istreambuf_iterator<char>(f)),
