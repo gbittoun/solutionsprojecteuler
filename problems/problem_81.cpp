@@ -14,15 +14,20 @@ void FillMatrix(long long matrix[MATRIX_SIZE][MATRIX_SIZE], const string & str)
 
     long long current = 0;
     int row = 0, col = 0;
+    bool incomingNumber = false;
 
     for(int i = 0 ; i < length ; ++i)
     {
         if(raw[i] >= '0' && raw[i] <= '9' )
+        {
+            incomingNumber = true;
             current = current * 10 + (raw[i] - '0');
-        else
+        }
+        else if (incomingNumber)
         {
             matrix[row][col] = current;
             current = 0;
+            incomingNumber = false;
 
             col += 1;
             if(col >= MATRIX_SIZE)
@@ -46,32 +51,43 @@ int problem_81()
 
     FillMatrix(mat, str);
 
+    // Parsing matrix from left to right
     for(int i = 1 ; i < MATRIX_SIZE ; ++i)
     {
         for(int j = 0 ; j <= i ; ++j)
         {
+            //cout << (i-j) << " " << j << endl;
+
             if(j == 0)
                 mat[i - j][j] += mat[i - j - 1][j];
             else if(j == i)
                 mat[i - j][j] += mat[i - j][j - 1];
             else
-                mat[i - j][j] += (mat[i - j - 1][j] < mat[i - j][j - 1]) ? mat[i - j - 1][j] : mat[i - j][j - 1];
+                mat[i - j][j] += ((mat[i - j - 1][j] < mat[i - j][j - 1]) ? mat[i - j - 1][j] : mat[i - j][j - 1]);
         }
     }
 
+    // Parsing matrix from right to left
     for(int i = MATRIX_SIZE - 2 ; i >= 0 ; --i)
     {
-        for(int j = MATRIX_SIZE - 1 ; j >= i ; --j)
+        for(int j = 0 ; j <= MATRIX_SIZE - 1 - i ; ++j)
         {
-            cout << i << " " << j << endl;
+            //cout << (i + j) << " " << (MATRIX_SIZE - 1 - j) << endl;
+
+            if((i + j) == (MATRIX_SIZE - 1))
+                mat[i + j][MATRIX_SIZE - 1 - j] += mat[i + j][MATRIX_SIZE - 1 - j + 1];
+            else if ((MATRIX_SIZE - 1 - j) == (MATRIX_SIZE - 1))
+                mat[i + j][MATRIX_SIZE - 1 - j] += mat[i + j + 1][MATRIX_SIZE - 1 - j];
+            else
+                mat[i + j][MATRIX_SIZE - 1 - j] += (mat[i + j + 1][MATRIX_SIZE - 1 - j] < mat[i + j][MATRIX_SIZE - 1 - j + 1]) ? mat[i + j + 1][MATRIX_SIZE - 1 - j] : mat[i + j][MATRIX_SIZE - 1 - j + 1];
         }
     }
 
     long long min = 0x7fffffffffffffffLL;
 
-    for(int i = 0 ; i < MATRIX_SIZE ; ++i)
+    for(int i = 0 ; i < MATRIX_SIZE - 1 ; ++i)
     {
-        min = (min < mat[i][i]) ? min : mat[i][i];
+        min = (min < mat[MATRIX_SIZE - 1 - i][i]) ? min : mat[MATRIX_SIZE - 1 - i][i];
     }
 
     cout << min << endl;
