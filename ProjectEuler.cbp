@@ -44,6 +44,7 @@
 		<Unit filename="Computing/Matrix.hpp" />
 		<Unit filename="Computing/StringOperations.cpp" />
 		<Unit filename="Computing/StringOperations.hpp" />
+		<Unit filename="IO/FillMatrix.hpp" />
 		<Unit filename="PokerGame/Card.cpp" />
 		<Unit filename="PokerGame/Card.hpp" />
 		<Unit filename="PokerGame/Hand.cpp" />

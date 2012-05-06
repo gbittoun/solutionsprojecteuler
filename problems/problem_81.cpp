@@ -1,4 +1,5 @@
 #include "problem_81.hpp"
+#include "../IO/FillMatrix.hpp"
 
 #include <iostream>
 #include <fstream>
@@ -6,38 +7,6 @@
 using namespace std;
 
 #define MATRIX_SIZE 80
-
-void FillMatrix(long long matrix[MATRIX_SIZE][MATRIX_SIZE], const string & str)
-{
-    const char * raw = str.c_str();
-    const int length = str.size();
-
-    long long current = 0;
-    int row = 0, col = 0;
-    bool incomingNumber = false;
-
-    for(int i = 0 ; i < length ; ++i)
-    {
-        if(raw[i] >= '0' && raw[i] <= '9' )
-        {
-            incomingNumber = true;
-            current = current * 10 + (raw[i] - '0');
-        }
-        else if (incomingNumber)
-        {
-            matrix[row][col] = current;
-            current = 0;
-            incomingNumber = false;
-
-            col += 1;
-            if(col >= MATRIX_SIZE)
-            {
-                col = 0;
-                row += 1;
-            }
-        }
-    }
-}
 
 int problem_81()
 {
