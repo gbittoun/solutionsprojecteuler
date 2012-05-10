@@ -25,8 +25,6 @@ int problem_81()
     {
         for(int j = 0 ; j <= i ; ++j)
         {
-            //cout << (i-j) << " " << j << endl;
-
             if(j == 0)
                 mat[i - j][j] += mat[i - j - 1][j];
             else if(j == i)
