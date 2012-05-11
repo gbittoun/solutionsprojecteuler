@@ -205,6 +205,8 @@
 		<Unit filename="problems\problem_83.hpp" />
 		<Unit filename="problems\problem_86.cpp" />
 		<Unit filename="problems\problem_86.hpp" />
+		<Unit filename="problems\problem_87.cpp" />
+		<Unit filename="problems\problem_87.hpp" />
 		<Unit filename="problems\problem_9.cpp" />
 		<Unit filename="problems\problem_9.hpp" />
 		<Extensions>
