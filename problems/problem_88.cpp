@@ -1,10 +1,14 @@
+#include <iostream>
 #include <map>
 #include <set>
 #include <vector>
 
-using namespace std;
+#include "../Computing/IntegerOperations.hpp"
 
-void FlattenPrimeMap(vector<int> & primes, map<long long, int> & pd)
+using namespace std;
+using namespace Computing;
+
+void FlattenPrimeMap(vector<long long> & primes, map<long long, int> & pd)
 {
     for (map<long long, int>::iterator it = pd.begin() ; it != pd.end() ;  ++it)
     {
@@ -13,26 +17,50 @@ void FlattenPrimeMap(vector<int> & primes, map<long long, int> & pd)
     }
 }
 
-map<int, int> GetProductSumCombinations(int x, set<long long> & primes)
+void GetCombinations(set<long long> & combinations, vector<long long>::iterator current, vector<long long>::iterator end, long long n, long long result = 1)
+{
+    for ( ; current != end ; ++current)
+    {
+        if(n > 0)
+            GetCombinations(combinations, current + 1, end, n-1, result**current);
+        else
+        {
+            combinations.insert(result**current);
+        }
+    }
+}
+
+void GetDivisors(set<long long> & combinations, long long x, set<long long> & primes)
 {
     map<long long, int> pd; // prime decomposition
 
-    Decompose(x, primes,  & pd);
+    Decompose(x, primes, pd);
 
-    vector<long long> primes;
+    vector<long long> flatPrimeSet;
 
-    FlattenPrimeMap(primes, pd)
+    FlattenPrimeMap(flatPrimeSet, pd);
 
-    for (i = 1 ; i <= primes.size() ; ++i)
+    for (int i = 0 ; i < flatPrimeSet.size() ; ++i)
     {
-        InsertCombinations()
+        GetCombinations(combinations, flatPrimeSet.begin(), flatPrimeSet.end(), i);
     }
-
-    return map<int, int>();
 }
-
 
 int problem_88()
 {
+    set<long long> primes;
+    FillPrimes(primes, 100000);
+
+    long long x = 2*2*3*5*7;
+
+    set<long long> combinations;
+    GetDivisors(combinations, x, primes);
+
+    for(set<long long>::iterator it = combinations.begin() ; it != combinations.end() ; ++it)
+    {
+        cout << *it << ", ";
+    }
+    cout << endl;
+
     return 0;
 }
