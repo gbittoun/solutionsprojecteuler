@@ -46,21 +46,100 @@ void GetDivisors(set<long long> & combinations, long long x, set<long long> & pr
     }
 }
 
+long long GetNumber(vector<long long> & flatPrimeSet, long long p)
+{
+    vector<long long> output;
+
+    long long tmp = 1;
+    for(vector<long long>::iterator it = flatPrimeSet.begin() ; it != flatPrimeSet.end() ; ++it)
+    {
+        tmp *= *it;
+
+        if(p & 0x01)
+        {
+            output.push_back(tmp);
+            tmp = 1;
+        }
+
+        p >>= 1;
+    }
+    output.push_back(tmp);
+
+    tmp = 0;
+    for(vector<long long>::iterator it = output.begin() ; it != output.end() ; ++it)
+    {
+        tmp += *it;
+    }
+
+    return tmp;
+}
+
+long long GetNbInt(long long p)
+{
+    long long result = 0;
+
+    while(p > 0)
+    {
+        if (p & 0x01)
+            ++result;
+        p >>= 1;
+    }
+
+    return result + 1;
+}
+
 int problem_88()
 {
     set<long long> primes;
     FillPrimes(primes, 100000);
 
-    long long x = 2*2*3*5*7;
+    map<long long, long long> result;
 
-    set<long long> combinations;
-    GetDivisors(combinations, x, primes);
+    set<long long> progress;
+    for (long long i = 2 ; i <= 12000 ; ++i)
+        progress.insert(i);
 
-    for(set<long long>::iterator it = combinations.begin() ; it != combinations.end() ; ++it)
+    int biggest = 0;
+    long long x = 2;
+    while(progress.size() > 0)
     {
-        cout << *it << ", ";
+        map<long long, int> pd; // prime decomposition
+
+        Decompose(x, primes, pd);
+
+        vector<long long> flatPrimeSet;
+
+        FlattenPrimeMap(flatPrimeSet, pd);
+
+        for(long long p = 1 ; p < power(2, flatPrimeSet.size() - 1) ; ++p)
+        {
+            long long num = GetNumber(flatPrimeSet, p);
+            long long nbInt = GetNbInt(p) + (x - num);
+
+            if(result.find(nbInt) == result.end())
+            {
+                result[nbInt] = x;
+                progress.erase(nbInt);
+            }
+        }
+
+        ++x;
     }
-    cout << endl;
+
+    set<long long> finalResult;
+
+    for (int i = 2 ; i <= 12000 ; ++i)
+    {
+        finalResult.insert(result[i]);
+    }
+
+    long long sum = 0;
+    for(set<long long>::iterator it = finalResult.begin() ; it != finalResult.end() ; ++it)
+    {
+        sum += *it;
+    }
+
+    cout << sum << endl;
 
     return 0;
 }
