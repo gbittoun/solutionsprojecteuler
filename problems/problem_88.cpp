@@ -1,5 +1,6 @@
 #include <iostream>
 #include <map>
+#include <queue>
 #include <set>
 #include <vector>
 
@@ -30,7 +31,7 @@ void GetCombinations(set<long long> & combinations, vector<long long>::iterator 
     }
 }
 
-void GetDivisors(set<long long> & combinations, long long x, set<long long> & primes)
+void GetDivisors(set<long long> & divisors, long long x, set<long long> & primes)
 {
     map<long long, int> pd; // prime decomposition
 
@@ -42,7 +43,7 @@ void GetDivisors(set<long long> & combinations, long long x, set<long long> & pr
 
     for (int i = 0 ; i < flatPrimeSet.size() ; ++i)
     {
-        GetCombinations(combinations, flatPrimeSet.begin(), flatPrimeSet.end(), i);
+        GetCombinations(divisors, flatPrimeSet.begin(), flatPrimeSet.end(), i);
     }
 }
 
@@ -93,53 +94,53 @@ int problem_88()
     set<long long> primes;
     FillPrimes(primes, 100000);
 
-    map<long long, long long> result;
+    long long x = 180;
 
-    set<long long> progress;
-    for (long long i = 2 ; i <= 12000 ; ++i)
-        progress.insert(i);
+    /*set<long long> divisors;
+    GetDivisors(divisors, x, primes);
 
-    int biggest = 0;
-    long long x = 2;
-    while(progress.size() > 0)
+    for(set<long long>::iterator it = divisors.begin() ; it != divisors.end() ; ++it)
     {
-        map<long long, int> pd; // prime decomposition
+        cout << *it << ", ";
+    }
+    cout << endl;
+    */
 
-        Decompose(x, primes, pd);
+    queue<vector<long long> > q;
+    vector<long long> v;
+    v.push_back(x);
+    q.push(v);
 
-        vector<long long> flatPrimeSet;
+    while (q.size() > 0)
+    {
+        vector<long long> v = q.front();
+        q.pop();
 
-        FlattenPrimeMap(flatPrimeSet, pd);
+        for(vector<long long>::iterator it = v.begin() ; it != v.end() ; ++it)
+            cout << *it << ", ";
+        cout << endl;
 
-        for(long long p = 1 ; p < power(2, flatPrimeSet.size() - 1) ; ++p)
+        for(int i = 0 ; i < v.size() ; ++i)
         {
-            long long num = GetNumber(flatPrimeSet, p);
-            long long nbInt = GetNbInt(p) + (x - num);
+            set<long long> divisors;
+            GetDivisors(divisors, v[i], primes);
 
-            if(result.find(nbInt) == result.end())
+            int num = (divisors.size() - 1) / 2;
+            for(int count = 0 ; count < num ; ++count)
             {
-                result[nbInt] = x;
-                progress.erase(nbInt);
+                long long d = *divisors.begin();
+                divisors.erase(divisors.begin());
+
+                vector<long long> v_copy(v);
+                v_copy.erase(v_copy.begin() + i);
+
+                v_copy.push_back(d);
+                v_copy.push_back(v[i] / d);
+
+                q.push(v_copy);
             }
         }
-
-        ++x;
     }
-
-    set<long long> finalResult;
-
-    for (int i = 2 ; i <= 12000 ; ++i)
-    {
-        finalResult.insert(result[i]);
-    }
-
-    long long sum = 0;
-    for(set<long long>::iterator it = finalResult.begin() ; it != finalResult.end() ; ++it)
-    {
-        sum += *it;
-    }
-
-    cout << sum << endl;
 
     return 0;
 }
