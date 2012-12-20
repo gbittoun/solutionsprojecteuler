@@ -229,5 +229,42 @@ namespace Computing
 
         return (p[n] = (res % 1000000LL));
     }
-}
 
+    void FlattenPrimeMap(vector<long long> & primes, map<long long, int> & pd)
+    {
+        for (map<long long, int>::iterator it = pd.begin() ; it != pd.end() ;  ++it)
+        {
+            for (int n = 0 ; n < it->second ; ++n)
+                primes.push_back(it->first);
+        }
+    }
+
+    void GetCombinations(set<long long> & combinations, vector<long long>::iterator current, vector<long long>::iterator end, long long n, long long result)
+    {
+        for ( ; current != end ; ++current)
+        {
+            if(n > 0)
+                GetCombinations(combinations, current + 1, end, n-1, result**current);
+            else
+            {
+                combinations.insert(result**current);
+            }
+        }
+    }
+
+    void GetDivisors(set<long long> & divisors, long long x, set<long long> & primes)
+    {
+        map<long long, int> pd; // prime decomposition
+
+        Decompose(x, primes, pd);
+
+        vector<long long> flatPrimeSet;
+
+        FlattenPrimeMap(flatPrimeSet, pd);
+
+        for (int i = 0 ; i < flatPrimeSet.size() ; ++i)
+        {
+            GetCombinations(divisors, flatPrimeSet.begin(), flatPrimeSet.end(), i);
+        }
+    }
+}

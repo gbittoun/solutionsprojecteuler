@@ -124,6 +124,18 @@ namespace Computing
 
         return x;
     }
+
+    void FlattenPrimeMap(vector<long long> & primes, map<long long, int> & pd);
+
+    void GetCombinations(
+        set<long long> & combinations,
+        vector<long long>::iterator current,
+        vector<long long>::iterator end,
+        long long n,
+        long long result = 1);
+
+    void GetDivisors(set<long long> & divisors, long long x, set<long long> & primes);
+
 }
 
 #endif
