@@ -63,28 +63,14 @@ public:
 
 };
 
-std::vector<int> getPatternFromNumber(long long x)
+
+std::map<long long, std::set<long long>, SetComparer> getNumberAnagrams()
 {
-}
+    std::map<long long, std::set<long long>, SetComparer> mNumbers;
 
-int main()
-{
-    // std::set<long long> squares;
-    // for (long long i = 0 ; i < 1000000 ; ++i)
-    //     squares.insert(i * i);
-    //     //std::cout << i * i << std::endl;
-
-    // std::set<int> sizes;
-    // for (auto word : words)
-    //     sizes.insert(word.size());
-    // std::cout << "MAX SIZE: " << *sizes.rbegin() << std::endl;
-
-    std::map<long long, std::vector<long long>, SetComparer> mNumbers;
-    std::map<std::string, std::vector<std::string>, SetComparer> mWords;
-
-    for (long long i = 0 ; i < 1000000 ; ++i)
+    for (long long i = 0 ; i < 100000 ; ++i)
     {
-        mNumbers[i * i].push_back(i * i);
+        mNumbers[i * i].insert(i * i);
     }
 
     for (auto kv : mNumbers)
@@ -93,11 +79,17 @@ int main()
             mNumbers.erase(kv.first);
     }
 
-    std::cout << "Nb number anagrams :" << mNumbers.size() << std::endl;
+    return mNumbers;
+}
+
+
+std::map<std::string, std::set<std::string>, SetComparer> getWordAnagrams()
+{
+    std::map<std::string, std::set<std::string>, SetComparer> mWords;
 
     for (auto word : words)
     {
-        mWords[word].push_back(word);
+        mWords[word].insert(word);
     }
 
     for (auto kv : mWords)
@@ -106,14 +98,123 @@ int main()
             mWords.erase(kv.first);
     }
 
-    std::cout << "Nb word anagrams :" << mWords.size() << std::endl;
+    return mWords;
+}
+
+bool match(std::string str, long long number)
+{
+    std::reverse(str.begin(), str.end());
+
+    std::map<int, int> char2Num;
+    std::map<int, int> num2Char;
+
+    auto it = str.begin();
+
+    while(it != str.end() && number > 0)
+    {
+        int n = number % 10;
+
+        if (char2Num.find(*it) != char2Num.end())
+        {
+            if (char2Num[*it] != n)
+                return false;
+        }
+        else if (num2Char.find(n) != num2Char.end())
+        {
+            if (num2Char[n] != *it)
+                return false;
+        }
+        else
+        {
+            num2Char[n] = *it;
+            char2Num[*it] = n;
+        }
+
+        number /= 10;
+        ++it;
+    }
+
+    if (number > 0 || it != str.end())
+        return false;
+
+    return true;
+}
+
+std::string transform(std::string input, long long x, long long y)
+{
+    std::reverse(input.begin(), input.end());
+
+    std::string output;
+
+    std::map<int, std::string::value_type> correspondance;
+
+    int position = 0;
+    while (x)
+    {
+        correspondance[x % 10] = input[position++];
+        x /= 10;
+    }
+
+    while (y)
+    {
+        output += correspondance[y % 10];
+        y /= 10;
+    }
+
+    std::reverse(output.begin(), output.end());
+
+    return output;
+}
+
+template<typename T, typename U>
+std::ostream & operator<<(std::ostream & os, std::pair<T, U> const & p)
+{
+    os << "{" << p.first << ", " << p.second << "}";
+
+    return os;
+}
+
+
+int main()
+{
+    std::map<long long, std::set<long long>, SetComparer> mNumbers = getNumberAnagrams();
+    std::map<std::string, std::set<std::string>, SetComparer> mWords = getWordAnagrams();
+
+    std::set<long long> numberAnagrams;
+    std::set<std::string> wordAnagrams;
+
+    for (auto kv : mNumbers)
+        for (auto v : kv.second)
+            numberAnagrams.insert(v);
 
     for (auto kv : mWords)
-    {
-        std::cout << kv.first << ": ";
         for (auto v : kv.second)
-            std::cout << v << " ";
-        std::cout << std::endl;
+            wordAnagrams.insert(v);
+
+    std::set<std::pair<long long, std::string>> allPairs;
+
+    for (auto n : numberAnagrams)
+    {
+        for (auto word : wordAnagrams)
+        {
+            if (match(word, n))
+                allPairs.insert(std::make_pair(n, word));
+        }
+    }
+
+    std::cout << allPairs.size() << std::endl;
+
+    SetComparer comparer;
+    for (auto pair1 : allPairs)
+    {
+        for (auto pair2 : allPairs)
+        {
+            if (pair1.first != pair2.first && pair1.second != pair2.second && pair1.second.size() == pair2.second.size())
+            {
+                if (pair2.second == transform(pair1.second, pair1.first, pair2.first))
+                    std::cout << pair1 << " " << pair2 << std::endl;
+            }
+        }
     }
 
     return 0;
