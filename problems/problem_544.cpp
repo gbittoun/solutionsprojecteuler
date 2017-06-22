@@ -6,7 +6,7 @@
 #include <vector>
 
 
-void computeSolutions(std::map<int, std::map<int, int>> & table, std::map<int, std::map<int, long long>> & tableCount, int rMax, int cMax, int r, int c, int colors, long long & count)
+void computeSolutions(std::map<int, std::map<int, int>> & table, std::map<int, std::map<int, long long>> & tableCount, std::map<int, std::map<int, long long>> & tableCrossCount, int rMax, int cMax, int r, int c, int colors, long long & count)
 {
     if (r == rMax)
     {
@@ -35,13 +35,18 @@ void computeSolutions(std::map<int, std::map<int, int>> & table, std::map<int, s
         table[r][c] = i;
         ++tableCount[r][c];
 
+        if (r > 0 && c + 1 < cMax && table[r][c] == table[r-1][c+1])
+        {
+            ++tableCrossCount[r][c];
+        }
+
         if (c == cMax - 1)
         {
-            computeSolutions(table, tableCount, rMax, cMax, r + 1, 0, colors, count);
+            computeSolutions(table, tableCount, tableCrossCount, rMax, cMax, r + 1, 0, colors, count);
         }
         else
         {
-            computeSolutions(table, tableCount, rMax, cMax, r, c + 1, colors, count);
+            computeSolutions(table, tableCount, tableCrossCount, rMax, cMax, r, c + 1, colors, count);
         }
     }
 }
@@ -50,14 +55,26 @@ void displayCount(int rMax, int cMax, int colors)
 {
     std::map<int, std::map<int, int>> table;
     std::map<int, std::map<int, long long>> tableCount;
+    std::map<int, std::map<int, long long>> tableCrossCount;
     long long count = 0;
-    computeSolutions(table, tableCount, rMax, cMax, 0, 0, colors, count);
+    computeSolutions(table, tableCount, tableCrossCount, rMax, cMax, 0, 0, colors, count);
 
     for (int i = 0 ; i < rMax ; ++i)
     {
         for (int j = 0 ; j < cMax ; ++j)
         {
             std::cout << tableCount[i][j] << ", ";
+        }
+        std::cout << std::endl;
+    }
+
+    std::cout << std::endl;
+
+    for (int i = 0 ; i < rMax ; ++i)
+    {
+        for (int j = 0 ; j < cMax ; ++j)
+        {
+            std::cout << tableCrossCount[i][j] << ", ";
         }
         std::cout << std::endl;
     }
@@ -147,30 +164,6 @@ struct Inter :
         }
     }
 
-    void reduceSiblings()
-    {
-        auto it1 = children.begin();
-        while (it1 != children.end())
-        {
-            auto it2 = children.begin();
-            while (it2 != children.end())
-            {
-                if (it1 == it2)
-                {
-                    ++it2;
-                    continue;
-                }
-
-                if ((*it1)->dump() == (*it2)->dump())
-                    it2 = children.erase(it2);
-                else
-                    ++it2;
-            }
-
-            ++it1;
-        }
-    }
-
     virtual void reduce()
     {
         for (auto & child : children)
@@ -194,10 +187,6 @@ struct Inter :
         }
 
         return sstream.str();
-    }
-
-    bool operator<(Inter const & other)
-    {
     }
 };
 
@@ -225,30 +214,6 @@ struct Union :
             }
 
             ++it;
-        }
-    }
-
-    void reduceSiblings()
-    {
-        auto it1 = children.begin();
-        while (it1 != children.end())
-        {
-            auto it2 = children.begin();
-            while (it2 != children.end())
-            {
-                if (it1 == it2)
-                {
-                    ++it2;
-                    continue;
-                }
-
-                if ((*it1)->dump() == (*it2)->dump())
-                    it2 = children.erase(it2);
-                else
-                    ++it2;
-            }
-
-            ++it1;
         }
     }
 
@@ -448,7 +413,6 @@ std::vector<std::pair<N, int>> definitiveSplit(std::vector<std::pair<N, int>> ns
             }
         }
 
-        std::cout << result.size() << std::endl;
         ns = result;
 
         if (!changed)
@@ -657,50 +621,22 @@ polynome getPolynomeFromN(N const & n, int totalSquares)
 
 int main()
 {
-#if 0
+#if 1
 
-    int rows = 2, cols = 2;
-
-    N n;
-    std::shared_ptr<Inter> inter(new Inter());
-
-    for (int r = 0 ; r < rows ; ++r)
-    {
-        for (int c = 0 ; c < cols ; ++c)
-        {
-            if (r + 1 < rows)
-                inter->children.insert(
-                    std::shared_ptr<DifferenceEvent>(new DifferenceEvent(Index(r, c), Index(r+1, c))));
-            if (c + 1 < cols)
-                inter->children.insert(
-                    std::shared_ptr<DifferenceEvent>(new DifferenceEvent(Index(r, c), Index(r, c + 1))));
-        }
-    }
-
-    n.inter = inter;
-    n.inter->reduce();
-
-    n.split();
-
-    std::vector<std::pair<N, int>> ns;
-    ns.push_back(std::make_pair(n, 1));
-    ns = definitiveSplit(ns);
-
-    std::cout << ns << std::endl;
-
-    n = ns.rbegin()->first;
-
-    std::cout << n.inter->dump() << std::endl;
-
-    n.inter->reduce();
-
-    std::cout << n.inter->dump() << std::endl;
+    displayCount(2, 5, 3);
+    std::cout << std::endl;
+    displayCount(3, 5, 3);
+    std::cout << std::endl;
+    displayCount(4, 5, 3);
+    std::cout << std::endl;
+    displayCount(5, 5, 3);
+    std::cout << std::endl;
 
 #else
 
-    for (int rows = 2 ; rows < 5 ; ++rows)
+    for (int rows = 2 ; rows < 10 ; ++rows)
     {
-        for (int cols = rows ; cols < 5 ; ++cols)
+        for (int cols = rows ; cols < 10 ; ++cols)
         {
             N n;
             std::shared_ptr<Inter> inter(new Inter());
@@ -723,7 +659,17 @@ int main()
 
             std::vector<std::pair<N, int>> ns;
             ns.push_back(std::make_pair(n, 1));
-            ns = definitiveSplit(ns);
+
+            try
+            {
+                ns = definitiveSplit(ns);
+            }
+            catch (std::exception & e)
+            {
+                std::cout << e.what() << std::endl;
+                std::cout << "continuing…" << std::endl;
+                continue;
+            }
 
             // std::cout << ns << std::endl;
 
