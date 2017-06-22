@@ -1,5 +1,3 @@
-#include "problem_33.hpp"
-
 #include "../Computing/IntegerOperations.hpp"
 
 #include <iostream>
@@ -7,7 +5,7 @@
 using namespace std;
 using namespace Computing;
 
-int problem_33()
+int main()
 {
     long long finalUp = 1;
     long long finalDown = 1;

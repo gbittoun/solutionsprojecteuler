@@ -1,10 +1,8 @@
-#include "problem_9.hpp"
-
 #include <iostream>
 
 using namespace std;
 
-int problem_9()
+int main()
 {
     long a = 0, b = 0, c = 0;
 

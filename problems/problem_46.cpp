@@ -1,14 +1,12 @@
 #include <set>
 
-#include "problem_37.hpp"
-#include "problem_46.hpp"
-
 #include <iostream>
 #include <math.h>
 
 #include "../Computing/IntegerOperations.hpp"
 
 using namespace std;
+
 
 bool Test(set<long long> & p, long long idx)
 {
@@ -29,7 +27,7 @@ bool Test(set<long long> & p, long long idx)
     return false;
 }
 
-int problem_46()
+int main()
 {
     set<long long> p;
     Computing::FillPrimes(p, 10000);

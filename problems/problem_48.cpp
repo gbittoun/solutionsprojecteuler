@@ -2,7 +2,6 @@
 
 using namespace std;
 
-#include "problem_48.hpp"
 
 template<int N>
 void Spread(int * x)
@@ -41,7 +40,7 @@ void DigitsDump(int x[N])
 }
 
 
-int problem_48()
+int main()
 {
     int x[] = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 

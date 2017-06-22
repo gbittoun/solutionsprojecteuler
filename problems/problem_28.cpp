@@ -1,10 +1,9 @@
-#include "problem_28.hpp"
-
 #include <iostream>
 
 using namespace std;
 
-int problem_28()
+
+int main()
 {
     int last = 1;
     int n = 1;

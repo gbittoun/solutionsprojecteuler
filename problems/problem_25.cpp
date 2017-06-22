@@ -1,10 +1,9 @@
-#include "problem_25.hpp"
-
 #include "../Computing/FatNumber/FatNumber.hpp"
 
 using namespace Computing;
 
-int problem_25()
+
+int main()
 {
     FatNumber<1024> x, y;
     x = 1;

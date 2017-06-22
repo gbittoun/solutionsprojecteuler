@@ -55,7 +55,7 @@ public:
 };
 
 
-int problem_88()
+int main()
 {
     set<long long> primes;
     FillPrimes(primes, 100000);

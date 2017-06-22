@@ -3,7 +3,7 @@
 
 using namespace Computing;
 
-int problem_77()
+int main()
 {
     set<long long> primes;
 

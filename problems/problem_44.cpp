@@ -1,11 +1,10 @@
-#include "problem_44.hpp"
-
 #include <iostream>
 #include <set>
 
 using namespace std;
 
-int problem_44()
+
+int main()
 {
     set<long long> p;
 

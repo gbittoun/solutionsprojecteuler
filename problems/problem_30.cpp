@@ -1,8 +1,7 @@
-#include "problem_30.hpp"
-
 #include <iostream>
 
 using namespace std;
+
 
 bool IsEqualToFifth(int x, long long & result)
 {
@@ -31,7 +30,7 @@ bool IsEqualToFifth(int x, long long & result)
     return x == sum;
 }
 
-int problem_30()
+int main()
 {
     for(long long idx = 0 ; idx < 100000000LL ; ++idx)
     {

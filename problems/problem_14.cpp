@@ -1,8 +1,7 @@
-#include "problem_14.hpp"
-
 #include <iostream>
 
 using namespace std;
+
 
 long long iterate(long long x)
 {
@@ -16,7 +15,7 @@ long long iterate(long long x)
     }
 }
 
-int problem_14()
+int main()
 {
     long long maxChainNum = 0;
     long long maxChain = 0;

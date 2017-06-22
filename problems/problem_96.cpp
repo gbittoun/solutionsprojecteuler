@@ -3,12 +3,11 @@
 
 #include "../Sudoku/SudokuGrid.hpp"
 
-#include "problem_96.hpp"
-
 using namespace std;
 using namespace Sudoku;
 
-int problem_96()
+
+int main()
 {
     ifstream infile("sudoku.txt");
     SudokuGrid grid, result;

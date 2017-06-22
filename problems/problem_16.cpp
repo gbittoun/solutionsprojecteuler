@@ -1,11 +1,10 @@
-#include "problem_16.hpp"
-
 #include <string.h>
 #include <iostream>
 
 using namespace std;
 
-int problem_16()
+
+int main()
 {
     int x[1024];
     memset(x, 0, sizeof(x));

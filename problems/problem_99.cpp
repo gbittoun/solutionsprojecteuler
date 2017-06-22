@@ -2,7 +2,6 @@
 #include <fstream>
 #include <math.h>
 
-#include "problem_99.hpp"
 
 long long ReadLongLong(const char * & str)
 {
@@ -17,7 +16,7 @@ long long ReadLongLong(const char * & str)
     return result;
 }
 
-int problem_99()
+int main()
 {
     std::ifstream infile("base_exp.txt");
     std::string line;

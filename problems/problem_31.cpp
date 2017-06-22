@@ -1,13 +1,12 @@
 #include <iostream>
 #include <set>
 
-using namespace std;
-
-#include "problem_31.hpp"
-
 #include "../Computing/Combination.hpp"
 
-int problem_31()
+using namespace std;
+
+
+int main()
 {
     set<long long> coins;
     coins.insert(1);

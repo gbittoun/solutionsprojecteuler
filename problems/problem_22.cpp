@@ -1,5 +1,3 @@
-#include "problem_22.hpp"
-
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -7,7 +5,8 @@
 
 using namespace std;
 
-int problem_22()
+
+int main()
 {
     ifstream f("names.txt");
     string str((std::istreambuf_iterator<char>(f)), std::istreambuf_iterator<char>());

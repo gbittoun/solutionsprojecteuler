@@ -1,5 +1,3 @@
-#include "problem_15.hpp"
-
 #include "../Computing/IntegerOperations.hpp"
 
 #include <iostream>
@@ -7,7 +5,8 @@
 using namespace std;
 using namespace Computing;
 
-int problem_15()
+
+int main()
 {
     int up[20], down[19];
 

@@ -1,6 +1,3 @@
-#include "problem_52.hpp"
-#include "problem_49.hpp"
-
 #include <iostream>
 #include <vector>
 #include <map>
@@ -10,7 +7,8 @@
 using namespace std;
 using namespace Computing;
 
-int problem_52()
+
+int main()
 {
     map<map<char, int>, vector<long long>, DigitsComparer> result;
 

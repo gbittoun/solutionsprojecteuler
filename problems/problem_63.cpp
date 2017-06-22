@@ -1,5 +1,3 @@
-#include "problem_63.hpp"
-
 #include "../Computing/FatNumber/FatNumber.hpp"
 #include "../Computing/FatNumber/Power.hpp"
 
@@ -8,7 +6,8 @@
 using namespace std;
 using namespace Computing;
 
-int problem_63()
+
+int main()
 {
     int sum = 0;
 

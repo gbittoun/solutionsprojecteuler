@@ -1,14 +1,12 @@
 #include <vector>
 
-using namespace std;
-
 #include "../Computing/FatNumber/Palindrome.hpp"
 
-#include "problem_55.hpp"
-
 using namespace Computing;
+using namespace std;
 
-int problem_55()
+
+int main()
 {
     long long sum = 0;
 

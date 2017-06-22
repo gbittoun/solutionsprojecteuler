@@ -2,16 +2,14 @@
 #include <map>
 #include <set>
 
-#include "problem_51.hpp"
-#include "problem_37.hpp"
-
 #include "../Computing/IntegerOperations.hpp"
 #include "../Computing/DigitsOperations.hpp"
 
 using namespace std;
 using namespace Computing;
 
-int problem_51()
+
+int main()
 {
     set<long long> primes;
     FillPrimes(primes, 1000000LL);

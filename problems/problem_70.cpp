@@ -6,7 +6,7 @@ using namespace Computing;
 
 #include <iostream>
 
-int problem_70()
+int main()
 {
     set<long long> primes;
     FillPrimes(primes, 1000000LL);

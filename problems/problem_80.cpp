@@ -6,7 +6,7 @@
 using namespace std;
 using namespace Computing;
 
-int problem_80()
+int main()
 {
     int sum = 0;
 

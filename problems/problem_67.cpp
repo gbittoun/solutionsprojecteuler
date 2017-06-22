@@ -1,5 +1,3 @@
-#include "problem_67.hpp"
-
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -9,7 +7,8 @@
 
 using namespace std;
 
-int problem_67()
+
+int main()
 {
     fstream f("triangle.txt");
 

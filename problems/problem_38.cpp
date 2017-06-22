@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int problem_38()
+int main()
 {
     set<string> results;
 

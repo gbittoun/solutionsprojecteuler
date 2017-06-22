@@ -5,7 +5,7 @@
 
 const long long inf = 0x7fffffffffffffLL;
 
-int problem_83()
+int main()
 {
     ifstream f("matrix.txt");
     string str((istreambuf_iterator<char>(f)),

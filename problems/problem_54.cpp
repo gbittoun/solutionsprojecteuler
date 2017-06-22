@@ -3,14 +3,13 @@
 #include <set>
 #include <map>
 
-using namespace std;
-
 #include "../PokerGame/PokerConfig.hpp"
-#include "problem_54.hpp"
 
 using namespace Poker;
+using namespace std;
 
-int problem_54()
+
+int main()
 {
     fstream f("poker.txt");
     string str;

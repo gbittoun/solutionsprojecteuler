@@ -1,19 +1,15 @@
-using namespace std;
-
 #include <set>
 #include <iostream>
-
-#include "problem_37.hpp"
-#include "problem_49.hpp"
-
 #include <vector>
 
 #include "../Computing/IntegerOperations.hpp"
 #include "../Computing/DigitsOperations.hpp"
 
 using namespace Computing;
+using namespace std;
 
-int problem_49()
+
+int main()
 {
     set<long long> primes;
     Computing::FillPrimes(primes, 10000LL);

@@ -1,9 +1,9 @@
-#include "problem_4.hpp"
-#include "problem_36.hpp"
+#include "../Computing/IntegerOperations.hpp"
 
 #include <iostream>
 
 using namespace std;
+
 
 void DumpNumber(long long x, int base)
 {
@@ -23,13 +23,13 @@ void DumpNumber(long long x, int base)
     }
 }
 
-int problem_36()
+int main()
 {
     long long result = 0;
 
     for(long long idx = 0 ; idx < 1000000 ; ++idx)
     {
-        if(IsPalindrome(idx, 10) && IsPalindrome(idx, 2))
+        if(Computing::IsPalindrome(idx, 10) && Computing::IsPalindrome(idx, 2))
         {
             DumpNumber(idx, 10);
             cout << " ";

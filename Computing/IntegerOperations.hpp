@@ -12,6 +12,9 @@ namespace Computing
 {
     using namespace std;
 
+    int IsPalindrome(long long x, int base);
+    long long MakePalindrome(long long x, int base);
+
     class ComparePair
     {
         public :
@@ -135,7 +138,6 @@ namespace Computing
         long long result = 1);
 
     void GetDivisors(set<long long> & divisors, long long x, set<long long> & primes);
-
 }
 
 #endif

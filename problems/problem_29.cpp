@@ -1,5 +1,3 @@
-#include "problem_29.hpp"
-
 #include <set>
 
 #include "../Computing/FatNumber/Power.hpp"
@@ -7,7 +5,8 @@
 using namespace std;
 using namespace Computing;
 
-int problem_29()
+
+int main()
 {
     set<FatNumber<1024>, FatNumber<1024>::CompareFatNumber > numbers;
 

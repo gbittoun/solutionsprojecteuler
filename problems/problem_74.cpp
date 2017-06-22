@@ -31,7 +31,7 @@ long long FactorialSumLoop(long long n)
     return s.size();
 }
 
-int problem_74()
+int main()
 {
     long long sum = 0;
 
@@ -48,4 +48,3 @@ int problem_74()
 
     return 0;
 }
-

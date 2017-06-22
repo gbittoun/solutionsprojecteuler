@@ -1,9 +1,8 @@
-#include "problem_43.hpp"
-
 #include <iostream>
 #include <set>
 
 using namespace std;
+
 
 void GetDigits(int number, int & r0, int & r1, int & r2)
 {
@@ -16,7 +15,7 @@ void GetDigits(int number, int & r0, int & r1, int & r2)
     r2 = number % 10;
 }
 
-int problem_43()
+int main()
 {
     long long sum = 0;
 

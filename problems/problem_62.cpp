@@ -2,14 +2,13 @@
 #include <set>
 #include <map>
 
-#include "problem_49.hpp"
-
 #include "../Computing/DigitsOperations.hpp"
 
 using namespace std;
 using namespace Computing;
 
-int problem_62()
+
+int main()
 {
     map<map<char,int>, set<long long>, DigitsComparer> buffer;
 

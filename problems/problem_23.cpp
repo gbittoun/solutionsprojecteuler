@@ -1,4 +1,3 @@
-#include "problem_23.hpp"
 #include "../Computing/IntegerOperations.hpp"
 
 #include <iostream>
@@ -7,7 +6,8 @@
 using namespace std;
 using namespace Computing;
 
-int problem_23()
+
+int main()
 {
     set<int> abundants;
 

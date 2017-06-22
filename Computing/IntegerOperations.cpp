@@ -5,6 +5,25 @@
 
 namespace Computing
 {
+    int IsPalindrome(long long x, int base)
+    {
+        return x == MakePalindrome(x, base);
+    }
+
+    long long MakePalindrome(long long x, int base)
+    {
+        long long ret = 0;
+
+        while(x > 0)
+        {
+            ret *= base;
+            ret += x % base;
+            x /= base;
+        }
+
+        return ret;
+    }
+
     bool ComparePair::operator()(const pair<long long, long long> & a, const pair<long long, long long> & b)
     {
         if(a.first < b.first)

@@ -1,9 +1,8 @@
-#include "problem_21.hpp"
-
 #include <iostream>
 #include <set>
 
 using namespace std;
+
 
 int DivSum(int x)
 {
@@ -19,7 +18,7 @@ int DivSum(int x)
 }
 
 
-int problem_21()
+int main()
 {
     set<int> amis;
 

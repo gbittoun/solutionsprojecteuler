@@ -1,5 +1,3 @@
-#include "problem_86.hpp"
-
 #include "../Computing/Matrix.hpp"
 
 #include <queue>
@@ -8,7 +6,8 @@
 using namespace std;
 using namespace Computing;
 
-int problem_86()
+
+int main()
 {
     const int A[3][3] = { { 1, -2, 2}, { 2, -1, 2}, { 2, -2, 3} };
     const int B[3][3] = { { 1,  2, 2}, { 2,  1, 2}, { 2,  2, 3} };

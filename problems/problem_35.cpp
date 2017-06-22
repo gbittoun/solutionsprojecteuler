@@ -1,5 +1,3 @@
-#include "problem_35.hpp"
-
 #include <iostream>
 #include <set>
 
@@ -7,6 +5,7 @@
 
 using namespace std;
 using namespace Computing;
+
 
 long long CircShift(long long x, long long digits)
 {
@@ -18,7 +17,7 @@ long long CircShift(long long x, long long digits)
     return (x / 10) + (x % 10) * div;
 }
 
-int problem_35()
+int main()
 {
     set<long long> primes;
     primes.insert(2);

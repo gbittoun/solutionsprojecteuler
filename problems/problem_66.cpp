@@ -1,4 +1,3 @@
-#include "problem_66.hpp"
 #include "../Computing/IntegerOperations.hpp"
 
 #include <math.h>
@@ -6,7 +5,8 @@
 using namespace std;
 using namespace Computing;
 
-int problem_66()
+
+int main()
 {
     FatNumber<64> maxxplus = 0, maxxminus = 0;
     long long finalDplus = 0, finalDminus = 0;

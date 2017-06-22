@@ -1,5 +1,3 @@
-#include "problem_3.hpp"
-
 #include <iostream>
 
 using namespace std;
@@ -18,7 +16,7 @@ int is_prime_number(int n)
     return 1;
 }
 
-int problem_3()
+int main()
 {
     long long a = 600851475143LL;
     long long b = 775147;

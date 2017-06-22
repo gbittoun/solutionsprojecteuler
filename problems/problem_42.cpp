@@ -1,16 +1,15 @@
-#include "problem_42.hpp"
-
 #include <vector>
 #include <map>
 
 #include <iostream>
 #include <fstream>
 
-using namespace std;
-
 #include "../Computing/StringOperations.hpp"
 
-int problem_42()
+using namespace std;
+
+
+int main()
 {
 
     ifstream f("words.txt");

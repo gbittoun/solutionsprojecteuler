@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int problem_91()
+int main()
 {
     long long sum = 0;
 

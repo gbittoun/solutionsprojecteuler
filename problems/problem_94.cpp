@@ -1,16 +1,15 @@
 #include <iostream>
 #include <queue>
 
-#include "problem_94.hpp"
-
 using namespace std;
+
 
 struct Triple
 {
     long long a, b, c;
 };
 
-int problem_94()
+int main()
 {
     long long P = 0;
 

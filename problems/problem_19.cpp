@@ -1,8 +1,29 @@
-#include "problem_19.hpp"
-
 #include <iostream>
 
 using namespace std;
+
+
+class Date
+{
+    int day;
+    int month;
+    int year;
+
+    int dayOfWeek;
+
+    static const int daysInMonth[];
+    static const int daysInWeek;
+
+    public :
+
+    Date();
+
+    void NextMonth();
+    int GetDayOfWeek() const;
+    int GetYear() const;
+    int GetMonth() const;
+    int GetDay() const;
+};
 
 Date::Date() :
     day(0),
@@ -59,7 +80,7 @@ int Date::GetDay() const
 const int Date::daysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 const int Date::daysInWeek = 7;
 
-int problem_19()
+int main()
 {
     Date d;
     int sum = 0;

@@ -2,7 +2,7 @@
 
 using namespace Computing;
 
-int problem_78()
+int main()
 {
     for(long long n = 10000 ; n < 1000000LL ; ++n)
     {

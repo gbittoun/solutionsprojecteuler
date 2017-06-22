@@ -1,10 +1,10 @@
-#include "problem_34.hpp"
-
-#include "problem_24.hpp"
-
 #include <iostream>
 
+#include "../Computing/Combination.hpp"
+
+using namespace Computing;
 using namespace std;
+
 
 long long GetFactorialSum(long long x)
 {
@@ -23,7 +23,7 @@ long long GetFactorialSum(long long x)
     return sum;
 }
 
-int problem_34()
+int main()
 {
     long long sum = 0;
 

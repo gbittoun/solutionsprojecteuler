@@ -1,10 +1,8 @@
+#include <iostream>
 #include <set>
 
-#include "problem_27.hpp"
-
-#include <iostream>
-
 using namespace std;
+
 
 void recurse(const set<int> & p, int a, int b, int & n)
 {
@@ -12,7 +10,7 @@ void recurse(const set<int> & p, int a, int b, int & n)
         recurse(p, a, b, ++n);
 }
 
-int problem_27()
+int main()
 {
     set<int> primes;
     primes.insert(2);

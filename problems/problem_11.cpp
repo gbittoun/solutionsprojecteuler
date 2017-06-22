@@ -1,11 +1,10 @@
-#include "problem_11.hpp"
-
 #include <iostream>
 #include <stdlib.h>
 
 using namespace std;
 
-int problem_11()
+
+int main()
 {
     size_t idx, jdx;
 

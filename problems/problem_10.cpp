@@ -1,10 +1,9 @@
-#include "problem_10.hpp"
-
 #include <iostream>
 
 using namespace std;
 
-int problem_10()
+
+int main()
 {
     long nbPrimes = 2;
     long primes[200000L];

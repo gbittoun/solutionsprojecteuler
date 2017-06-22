@@ -1,11 +1,10 @@
-#include "problem_45.hpp"
-
 #include <iostream>
 #include <set>
 
 using namespace std;
 
-int problem_45()
+
+int main()
 {
     set<long long> P, H;
     long long n = 1;
@@ -25,13 +24,11 @@ int problem_45()
             cout << t << endl;
 
             if(++count >= 3)
-                goto TheEnd;
+                break;
         }
 
         ++n;
     }
-
-TheEnd:
 
     return 0;
 }

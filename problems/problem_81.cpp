@@ -1,4 +1,3 @@
-#include "problem_81.hpp"
 #include "../IO/FillMatrix.hpp"
 
 #include <iostream>
@@ -8,7 +7,8 @@ using namespace std;
 
 #define MATRIX_SIZE 80
 
-int problem_81()
+
+int main()
 {
     ifstream f("matrix.txt");
     string str((istreambuf_iterator<char>(f)),

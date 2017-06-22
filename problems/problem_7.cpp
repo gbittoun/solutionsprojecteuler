@@ -1,10 +1,8 @@
-#include "problem_7.hpp"
-
 #include <iostream>
 
 using namespace std;
 
-int problem_7()
+int main()
 {
     int primes[10001];
     int nbPrimes;

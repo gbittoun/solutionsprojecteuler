@@ -2,13 +2,12 @@
 #include <sstream>
 #include <set>
 
-#include "problem_32.hpp"
+#include "../Computing/DigitsOperations.hpp"
 
 using namespace std;
 
-#include "../Computing/DigitsOperations.hpp"
 
-int problem_32()
+int main()
 {
     set<int> results;
 

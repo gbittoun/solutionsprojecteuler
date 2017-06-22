@@ -1,16 +1,11 @@
-#include "problem_60.hpp"
-
 #include <iostream>
 #include <set>
-
-
-#include "problem_37.hpp"
-#include "problem_58.hpp"
 
 #include "../Computing/IntegerOperations.hpp"
 
 using namespace std;
 using namespace Computing;
+
 
 long long ConcatInt(long long p0, long long p1)
 {
@@ -34,7 +29,7 @@ long long ConcatInt(long long p0, long long p1)
     return result;
 }
 
-int problem_60()
+int main()
 {
     set<long long> primes;
     FillPrimes(primes, 1000000LL);

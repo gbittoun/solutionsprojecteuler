@@ -1,5 +1,3 @@
-#include "problem_61.hpp"
-
 #include <iostream>
 #include <set>
 
@@ -8,6 +6,7 @@
 
 using namespace std;
 using namespace Computing;
+
 
 void TestPolygonalSolution(set<int> & s0, set<int> & s1, set<int> & s2, set<int> & s3, set<int> & s4, set<int> & s5)
 {
@@ -48,7 +47,7 @@ void TestPolygonalSolution(set<int> & s0, set<int> & s1, set<int> & s2, set<int>
     }
 }
 
-int problem_61()
+int main()
 {
     set<int> s[6];
 

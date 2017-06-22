@@ -1,8 +1,7 @@
-#include "problem_40.hpp"
-
 #include <iostream>
 
 using namespace std;
+
 
 long long pow10(long long p)
 {
@@ -24,7 +23,7 @@ long long log10(long long p)
     return result;
 }
 
-int problem_40()
+int main()
 {
     long long idx = 1;
     long long count = 0;

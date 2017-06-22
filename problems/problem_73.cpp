@@ -5,7 +5,7 @@
 using namespace std;
 using namespace Computing;
 
-int problem_73()
+int main()
 {
     long long sum = 0;
 

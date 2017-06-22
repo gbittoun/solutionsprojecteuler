@@ -2,7 +2,7 @@
 
 using namespace Computing;
 
-int problem_72()
+int main()
 {
     set<long long> primes;
     FillPrimes(primes, 1000000LL);

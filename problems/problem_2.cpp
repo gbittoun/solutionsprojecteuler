@@ -1,5 +1,3 @@
-#include "problem_2.hpp"
-
 #include <iostream>
 
 using namespace std;
@@ -9,7 +7,7 @@ int fibonacci_inc(int n_0, int n_1)
     return n_0+n_1;
 }
 
-int problem_2()
+int main()
 {
     unsigned int n_0 = 1;
     unsigned int n_1 = 2;

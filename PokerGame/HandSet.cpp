@@ -1,11 +1,8 @@
-#include <set>
-#include <map>
-
-using namespace std;
-
 #include "Card.hpp"
 
 #include "HandSet.hpp"
+
+using namespace std;
 
 namespace Poker
 {

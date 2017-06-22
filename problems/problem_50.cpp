@@ -1,16 +1,13 @@
-#include "problem_50.hpp"
-
 #include <iostream>
 #include <set>
-
-#include "problem_37.hpp"
 
 #include "../Computing/IntegerOperations.hpp"
 
 using namespace std;
 using namespace Computing;
 
-int problem_50()
+
+int main()
 {
     set<long long> primes;
     FillPrimes(primes, 1000000LL);

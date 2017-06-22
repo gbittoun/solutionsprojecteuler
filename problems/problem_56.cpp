@@ -1,10 +1,9 @@
-#include "problem_56.hpp"
-
 #include "../Computing/FatNumber/Power.hpp"
 
 using namespace Computing;
 
-int problem_56()
+
+int main()
 {
     int sum = 0;
 

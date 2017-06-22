@@ -1,13 +1,13 @@
-#include "problem_26.hpp"
-
 #include "../Computing/IntegerOperations.hpp"
 
 #include <iostream>
 #include <set>
+#include <utility>
 
 using namespace std;
 
-int problem_26()
+
+int main()
 {
     int maxCount = 0;
     int candidate = 0;
@@ -30,10 +30,10 @@ int problem_26()
             cout << u/d;
             u %= d;
 
-            if(numbers.find(make_pair<int, int>(u, d)) != numbers.end())
+            if(numbers.find(make_pair(u, d)) != numbers.end())
                 break;
             else
-                numbers.insert(make_pair<int, int>(u, d));
+                numbers.insert(make_pair(u, d));
         }
         cout << endl;
 

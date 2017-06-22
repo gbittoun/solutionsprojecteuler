@@ -1,5 +1,3 @@
-#include "problem_75.hpp"
-
 #include "../Computing/Matrix.hpp"
 
 #include <map>
@@ -8,7 +6,8 @@
 using namespace std;
 using namespace Computing;
 
-int problem_75()
+
+int main()
 {
     int A[3][3] = { { 1, -2, 2}, { 2, -1, 2}, { 2, -2, 3}};
     int B[3][3] = { { 1,  2, 2}, { 2,  1, 2}, { 2,  2, 3}};

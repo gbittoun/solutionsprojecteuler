@@ -1,5 +1,3 @@
-#include "problem_64.hpp"
-
 #include "../Computing/IntegerOperations.hpp"
 
 #include <iostream>
@@ -7,7 +5,8 @@
 using namespace std;
 using namespace Computing;
 
-int problem_64()
+
+int main()
 {
     long long sum = 0;
 

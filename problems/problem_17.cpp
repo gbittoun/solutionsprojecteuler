@@ -1,5 +1,3 @@
-#include "problem_17.hpp"
-
 #include <iostream>
 #include <string>
 #include <map>
@@ -7,7 +5,8 @@
 
 using namespace std;
 
-int problem_17()
+
+int main()
 {
     map<int, string> numstr;
     numstr[1] = "one";

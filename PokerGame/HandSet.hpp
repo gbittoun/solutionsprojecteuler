@@ -1,3 +1,7 @@
+#include <set>
+#include <map>
+
+
 namespace Poker
 {
     class HandSet
@@ -9,12 +13,12 @@ namespace Poker
         private:
 
         Figure f;
-        map<int, set<Card::Value> > valueInFigure;
-        map<int, set<Card::Value> > otherCards;
+        std::map<int, std::set<Card::Value> > valueInFigure;
+        std::map<int, std::set<Card::Value> > otherCards;
 
         public:
 
-        HandSet(Figure _f, map<int, set<Card::Value> > _vif, map<int, set<Card::Value> > _oc);
+        HandSet(Figure _f, std::map<int, std::set<Card::Value> > _vif, std::map<int, std::set<Card::Value> > _oc);
         Figure GetFigure() const;
         int Compare(const HandSet & hs) const;
     };

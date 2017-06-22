@@ -1,3 +1,5 @@
+#include <string>
+
 namespace Poker
 {
     class HandParser
@@ -8,14 +10,14 @@ namespace Poker
 
         private :
 
-        string description;
-        string::const_iterator it;
+        std::string description;
+        std::string::const_iterator it;
 
         ParseStatus errorFlag;
 
         public :
 
-        HandParser(string description);
+        HandParser(std::string description);
         ParseStatus PopCard(Card & c);
     };
 }

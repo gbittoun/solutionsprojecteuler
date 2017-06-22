@@ -1,12 +1,11 @@
-#include "problem_13.hpp"
-
 #include <string.h>
 #include <iostream>
 #include <fstream>
 
 using namespace std;
 
-int problem_13()
+
+int main()
 {
     unsigned char a[64];
     memset(a,0,sizeof(a) / sizeof(char));
